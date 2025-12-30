@@ -1,0 +1,109 @@
+erDiagram
+    Review }|..|| Platform : links_to
+    Attendance }|..|| StaffProfile : links_to
+    StaffProfile ||--|| User : matches
+    PrescriptionItem }|..|| Consultation : links_to
+    Consultation ||--|| AppointmentRequest : matches
+    AppointmentRequest }|..|| Doctor : links_to
+    Doctor }|..|| Department : links_to
+    Doctor ||--|| User : matches
+    MaintenanceLog }|..|| Equipment : links_to
+    Consumable }|..|| Vendor : links_to
+    MaintenanceContract }|..|| Vendor : links_to
+    MaintenanceContract }|..|| Equipment : links_to
+    Equipment }|..|| EquipmentCategory : links_to
+    Equipment }|..|| Vendor : links_to
+    Vendor {
+        Char name
+        Int rating
+        Char phone
+        Email email
+    }
+    EquipmentCategory {
+        Char name
+        Text description
+    }
+    Equipment {
+        Char name
+        Char serial_number
+        Choice status
+        FK vendor
+        FK category
+        Date purchase_date
+        Date warranty_expiry
+        Decimal cost
+        Int useful_life
+        Image qr_code
+    }
+    MaintenanceContract {
+        FK equipment
+        FK vendor
+        Date contract_start
+        Date contract_end
+        Decimal cost
+        Calculated is_active
+    }
+    Consumable {
+        Char name
+        Int quantity_in_stock
+        Int minimum_stock_level
+        FK vendor
+    }
+    MaintenanceLog {
+        FK equipment
+        Date date
+        Char performed_by
+        Text description
+        Decimal cost
+    }
+    Doctor {
+        OneToOne user
+        Char name
+        FK department
+        Char specialization
+    }
+    Department {
+        Char name
+        Slug slug
+    }
+    AppointmentRequest {
+        Char name
+        Char phone
+        FK doctor
+        Date preferred_date
+        Choice status
+    }
+    Consultation {
+        OneToOne appointment
+        Text diagnosis
+        Text doctor_notes
+        Text prescriptions
+    }
+    PrescriptionItem {
+        FK consultation
+        Char medicine_name
+        Char dosage
+        Char duration
+    }
+    StaffProfile {
+        OneToOne user
+        Char employee_id
+        Char designation
+        Date joining_date
+    }
+    Attendance {
+        FK staff
+        Date date
+        Time check_in
+        Time check_out
+        Choice status
+    }
+    Platform {
+        Char name
+    }
+    Review {
+        FK platform
+        Char author_name
+        Int rating
+        Text content
+    }

@@ -1,0 +1,40 @@
+name: Deploy to Production EC2
+
+on:
+  push:
+    branches:
+      - main  # Set this to your default branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up SSH Key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.EC2_HOST_IP }} >> ~/.ssh/known_hosts
+
+    - name: Deploy using Script
+      env:
+        SERVER_IP: ${{ secrets.EC2_HOST_IP }}
+        DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+        EMAIL: ${{ secrets.EMAIL }}
+        SSH_USER: ${{ secrets.SSH_USER }}
+      run: |
+        # Make the script executable
+        chmod +x production/deploy_to_ec2.sh
+        
+        # Navigate to production folder where the script expects to run from
+        # Note: The script syncs "./" so we need to be in the folder we want to sync.
+        # If we want to sync the whole repo, we run from root.
+        # But locally we synced files INTO 'production/'. 
+        # If the repo structure mimics the production folder (apps/ in root), we run from root.
+        # Assuming the repo root has apps/, templates/, etc.
+        
+        ./production/deploy_to_ec2.sh "$SERVER_IP" "$DOMAIN_NAME" "$EMAIL" ~/.ssh/id_rsa "$SSH_USER"

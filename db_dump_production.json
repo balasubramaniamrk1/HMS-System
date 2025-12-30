@@ -1,0 +1,2367 @@
+[
+{
+    "model": "auth.group",
+    "fields": {
+        "name": "Doctors",
+        "permissions": []
+    }
+},
+{
+    "model": "auth.group",
+    "fields": {
+        "name": "Inventory Managers",
+        "permissions": []
+    }
+},
+{
+    "model": "auth.group",
+    "fields": {
+        "name": "Staff",
+        "permissions": []
+    }
+},
+{
+    "model": "auth.group",
+    "fields": {
+        "name": "IT Admin",
+        "permissions": []
+    }
+},
+{
+    "model": "auth.group",
+    "fields": {
+        "name": "Receptionist",
+        "permissions": []
+    }
+},
+{
+    "model": "auth.group",
+    "fields": {
+        "name": "Front Desk",
+        "permissions": []
+    }
+},
+{
+    "model": "auth.group",
+    "fields": {
+        "name": "Hospital Admins",
+        "permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$XLA6FJR14NiLnB1uLygtUZ$cbyO++z7TLJkuo6DJMy+J3DpYQ6W5ZjkAgt1Tc77KeQ=",
+        "last_login": "2025-12-26T04:53:48.275Z",
+        "is_superuser": true,
+        "username": "balasubramaniam",
+        "first_name": "",
+        "last_name": "",
+        "email": "balasubramaniamrk1@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-12-07T14:05:38Z",
+        "groups": [
+            [
+                "Staff"
+            ],
+            [
+                "IT Admin"
+            ]
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$O4Xmtn71YFF35ChxxxsbWp$mMkXqqVKsZ14qkeINjHOhT+o0tLGs5lAmXVupfFpddo=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "saravanan",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-12-07T15:56:23Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$CBTojEsfoH5uYrQLZmjeQM$m4E6vA2biZB8HPgOkRrU3SNfHX3udUnkZDAwT+kVlBE=",
+        "last_login": "2025-12-26T04:51:21.220Z",
+        "is_superuser": false,
+        "username": "Raja",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-12-09T05:56:04Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$tRUXubY4QwH6s0WlmsayGa$sRzUU6I4e0FAAOnpSW6eYTUCJUC+H4umAVvmPw/V2yg=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "Kavitha",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-12-21T14:20:41Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$nFzx7R93dF7a0eOBKsc7pk$Madtj8hmknW6G2xo3MpyYJnkVDXIvO/Jz3mMqLGmeIg=",
+        "last_login": "2025-12-27T05:17:16.368Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@example.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-12-23T13:30:04.794Z",
+        "groups": [
+            [
+                "IT Admin"
+            ]
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$nOefvEmSBIYmbFQmRtf0Np$eeo53jwWiNG+5X7+rbtnjGpe5gjC/NvjaqV2G49WAoI=",
+        "last_login": "2025-12-26T05:13:46.016Z",
+        "is_superuser": false,
+        "username": "receptionist",
+        "first_name": "Ramesh",
+        "last_name": "Kumar",
+        "email": "frontdesk@hms.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-12-24T03:54:25.318Z",
+        "groups": [
+            [
+                "Staff"
+            ],
+            [
+                "Receptionist"
+            ],
+            [
+                "Front Desk"
+            ]
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$SCKm6Hww2oGyORjLBXHyhP$HCxFtam9eLB5NOAOeqXYt30FZFvgUFcGigvOCR4DIPE=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "nurse_mary",
+        "first_name": "Mary",
+        "last_name": "Joseph",
+        "email": "mary@hms.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-12-24T03:55:26.171Z",
+        "groups": [
+            [
+                "Staff"
+            ]
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$IkvsStMyP0mxaNyKKDMCxu$4RNQEQQxUD2EaP5zxqiqMiBm/eLjks5oPYp02qw6hYc=",
+        "last_login": "2025-12-26T04:34:17.990Z",
+        "is_superuser": false,
+        "username": "inventory_mgr",
+        "first_name": "Suresh",
+        "last_name": "R",
+        "email": "store@hms.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-12-24T03:55:26.362Z",
+        "groups": [
+            [
+                "Inventory Managers"
+            ]
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$sGrGgOKcV7xyPenZhcuaZK$2neRo3mTgnYZyBQW31h4YnrXzhxBO+8PKdtlN4kA7jg=",
+        "last_login": "2025-12-27T05:04:40.641Z",
+        "is_superuser": false,
+        "username": "dr_ariva",
+        "first_name": "Arivalagan",
+        "last_name": "M",
+        "email": "ariva@hms.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-12-24T03:55:26.548Z",
+        "groups": [
+            [
+                "Doctors"
+            ]
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "test_doctor",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-12-25T13:09:18.201Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$8MLh0Wwb9YJWPje0FBPrdX$DjCKXeawJ0XrKTyckxZryv7U8dKgVRI0Vd0ybJRAXfA=",
+        "last_login": "2025-12-26T05:36:43.078Z",
+        "is_superuser": false,
+        "username": "item_mgr",
+        "first_name": "",
+        "last_name": "",
+        "email": "inventory@healthplus.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-12-26T05:21:29.547Z",
+        "groups": [
+            [
+                "Inventory Managers"
+            ]
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$WpIwOALX5hf66ZbYpL5FON$RMMW/uQ0MBY2RzYNWMexYkXj0ECMZ+8dHlvy+6PY7G4=",
+        "last_login": "2025-12-27T05:15:46.272Z",
+        "is_superuser": false,
+        "username": "hadmin",
+        "first_name": "Hospital",
+        "last_name": "Admin",
+        "email": "hadmin@example.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-12-27T03:25:33.885Z",
+        "groups": [
+            [
+                "Hospital Admins"
+            ]
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "1ph8jccl3u3e4nhkx9fmnau2hhkkltpb",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQRO_iGln-LYkp6TmDtV6vcQA5UpxUiLvjSCmgnHlv5i0CbmsJW-MlTElcBIjTbxeRnlx3kB5Y77Okua7LFOWuyIM2eZsTv66H-3dQsJW-NmcG5zSzU1lj1haoB7AWRwuYs0-YiH0kQ6qbpKKHcRjQKeORI4rPF_fKOLU:1vZ0uC:nE7t0tX47dpNzAy7H4pP4WcgvlDWwZznR7Cv-k0wH0A",
+        "expire_date": "2026-01-09T06:02:28.811Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "k5688nemy144hqyff2p508fjws8lsih7",
+    "fields": {
+        "session_data": ".eJxVjDkOwjAUBe_iGlm243ihpOcM1t9MAiiR4qRC3B0ipYD2zcx7qQLbOpStyVJGVmeV1Ol3Q6CHTDvgO0y3WdM8rcuIelf0QZu-zizPy-H-HQzQhm-N3jtvcwhoMPdVOsZYc-RkEMVEDgDOdsYnqJZ6EXJkHBuKNksgH9X7A-s1OCw:1vYJuu:-gRAMTtDk6sRXlfQ0_HVJmqLftwj8rGuQ4f7iPxw7G4",
+        "expire_date": "2026-01-07T08:08:20.544Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "tt0qasyout7fsct26wj622dtk4h5z20b",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQRO_iGln-LYkp6TmDtV6vcQA5UpxUiLvjSCmgnHlv5i0CbmsJW-MlTElcBIjTbxeRnlx3kB5Y77Okua7LFOWuyIM2eZsTv66H-3dQsJW-NmcG5zSzU1lj1haoB7AWRwuYs0-YiH0kQ6qbpKKHcRjQKeORI4rPF_fKOLU:1vZMg0:66CgR7ax2cNNnvC05BBlXTu0cOpAokf27TdSUyYLKDw",
+        "expire_date": "2026-01-10T05:17:16.371Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "ygw3b2qvdueyneqput63zu6nsxoc0jv7",
+    "fields": {
+        "session_data": ".eJxVjMsOwiAQRf-FtSHlDS7d-w1kYAapGkhKuzL-uzbpQrf3nHNfLMK21rgNWuKM7MwEO_1uCfKD2g7wDu3Wee5tXebEd4UfdPBrR3peDvfvoMKo31qiAiF1VlORXmvtg508OpOdIEyIEoOh4p1RFrBkAQSBbCguo3ZeW_b-ANouOB0:1vY46i:bq3oZLLWauOqTwIQacyB7ZdGfo3BG8gkhyTiyWtoFIk",
+        "expire_date": "2026-01-06T15:15:28.742Z"
+    }
+},
+{
+    "model": "core.galleryimage",
+    "pk": 1,
+    "fields": {
+        "image": "gallery/WhatsApp_Image_2025-12-25_at_21.13.59.jpeg",
+        "caption": "",
+        "uploaded_at": "2025-12-27T04:53:12.159Z"
+    }
+},
+{
+    "model": "doctors.department",
+    "pk": 2,
+    "fields": {
+        "name": "Cardialogy",
+        "slug": "cardialogy",
+        "description": "Cardialogy department",
+        "icon": ""
+    }
+},
+{
+    "model": "doctors.department",
+    "pk": 3,
+    "fields": {
+        "name": "Urology",
+        "slug": "urology",
+        "description": "Urology department",
+        "icon": ""
+    }
+},
+{
+    "model": "doctors.department",
+    "pk": 4,
+    "fields": {
+        "name": "Gynecologist",
+        "slug": "gynecologist",
+        "description": "This is for Gynecology dept",
+        "icon": ""
+    }
+},
+{
+    "model": "doctors.department",
+    "pk": 5,
+    "fields": {
+        "name": "Cardiology",
+        "slug": "cardiology",
+        "description": "Heart care",
+        "icon": ""
+    }
+},
+{
+    "model": "doctors.department",
+    "pk": 6,
+    "fields": {
+        "name": "Orthopedics",
+        "slug": "orthopedics",
+        "description": "Bone care",
+        "icon": ""
+    }
+},
+{
+    "model": "doctors.department",
+    "pk": 7,
+    "fields": {
+        "name": "General Medicine",
+        "slug": "general-medicine",
+        "description": "General care",
+        "icon": ""
+    }
+},
+{
+    "model": "doctors.department",
+    "pk": 8,
+    "fields": {
+        "name": "Administration",
+        "slug": "administration",
+        "description": "Admin stuff",
+        "icon": ""
+    }
+},
+{
+    "model": "doctors.doctor",
+    "pk": 1,
+    "fields": {
+        "user": null,
+        "department": 2,
+        "name": "Saravanan",
+        "slug": "saravanan",
+        "photo": "",
+        "qualifications": "MBBS, MD",
+        "specialization": "Cardialogy",
+        "bio": "TEst BIO for Saravanan",
+        "experience_years": 10,
+        "is_featured": true
+    }
+},
+{
+    "model": "doctors.doctor",
+    "pk": 2,
+    "fields": {
+        "user": null,
+        "department": 3,
+        "name": "Kavitha",
+        "slug": "kavitha",
+        "photo": "",
+        "qualifications": "MBBS,MD",
+        "specialization": "Urology",
+        "bio": "Test doctor",
+        "experience_years": 20,
+        "is_featured": true
+    }
+},
+{
+    "model": "doctors.doctor",
+    "pk": 3,
+    "fields": {
+        "user": null,
+        "department": 4,
+        "name": "Dr.Kavitha",
+        "slug": "drkavitha",
+        "photo": "",
+        "qualifications": "MBBS DGO",
+        "specialization": "Gynecology",
+        "bio": "asdasdasd",
+        "experience_years": 16,
+        "is_featured": true
+    }
+},
+{
+    "model": "doctors.doctor",
+    "pk": 4,
+    "fields": {
+        "user": [
+            "dr_ariva"
+        ],
+        "department": 5,
+        "name": "Dr. Arivalagan M",
+        "slug": "dr-arivalagan-m",
+        "photo": "",
+        "qualifications": "MBBS, MD",
+        "specialization": "Interventional Cardiology",
+        "bio": "Senior Cardiologist with 15 years experience.",
+        "experience_years": 15,
+        "is_featured": false
+    }
+},
+{
+    "model": "doctors.doctor",
+    "pk": 5,
+    "fields": {
+        "user": null,
+        "department": 6,
+        "name": "Dr. Saravanan",
+        "slug": "dr-saravanan",
+        "photo": "",
+        "qualifications": "MBBS, MS (Ortho)",
+        "specialization": "Joint Replacement",
+        "bio": "Expert in knee and hip replacements.",
+        "experience_years": 10,
+        "is_featured": false
+    }
+},
+{
+    "model": "doctors.doctor",
+    "pk": 6,
+    "fields": {
+        "user": [
+            "test_doctor"
+        ],
+        "department": 7,
+        "name": "Dr. Test",
+        "slug": "dr-test",
+        "photo": "",
+        "qualifications": "",
+        "specialization": "",
+        "bio": "",
+        "experience_years": 0,
+        "is_featured": false
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 1,
+    "fields": {
+        "name": "R.K.Balasubramaniam",
+        "phone": "09444143646",
+        "email": null,
+        "doctor": null,
+        "department": null,
+        "preferred_date": "2025-12-24",
+        "preferred_time": "Morning",
+        "message": "",
+        "status": "completed",
+        "created_at": "2025-12-07T13:51:54.688Z"
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 2,
+    "fields": {
+        "name": "R.K.Balasubramaniam",
+        "phone": "09444143646",
+        "email": null,
+        "doctor": 1,
+        "department": 2,
+        "preferred_date": "2025-12-25",
+        "preferred_time": "Evening",
+        "message": "",
+        "status": "completed",
+        "created_at": "2025-12-07T14:17:14.231Z"
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 3,
+    "fields": {
+        "name": "Shanthi",
+        "phone": "9962843646",
+        "email": null,
+        "doctor": 1,
+        "department": 2,
+        "preferred_date": "2025-12-11",
+        "preferred_time": "Evening",
+        "message": "",
+        "status": "completed",
+        "created_at": "2025-12-07T15:53:13.708Z"
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 4,
+    "fields": {
+        "name": "Sudhakar",
+        "phone": "9556686356",
+        "email": "sudhakar@gmail.com",
+        "doctor": 2,
+        "department": 2,
+        "preferred_date": "2025-12-24",
+        "preferred_time": "Evening",
+        "message": "",
+        "status": "completed",
+        "created_at": "2025-12-21T14:11:47.443Z"
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 5,
+    "fields": {
+        "name": "Sudersan",
+        "phone": "952467734",
+        "email": "sudersan@gmail.com",
+        "doctor": 1,
+        "department": 3,
+        "preferred_date": "2025-12-24",
+        "preferred_time": "Evening",
+        "message": "",
+        "status": "completed",
+        "created_at": "2025-12-21T14:32:50.965Z"
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 6,
+    "fields": {
+        "name": "Ramesh",
+        "phone": "09444143646",
+        "email": "rameshk@gmail.com",
+        "doctor": 4,
+        "department": 7,
+        "preferred_date": "2025-12-24",
+        "preferred_time": "Morning",
+        "message": "",
+        "status": "completed",
+        "created_at": "2025-12-24T06:24:21.463Z"
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 7,
+    "fields": {
+        "name": "Rajesh",
+        "phone": "4354597788",
+        "email": null,
+        "doctor": 4,
+        "department": 7,
+        "preferred_date": "2025-12-24",
+        "preferred_time": "Morning",
+        "message": "",
+        "status": "completed",
+        "created_at": "2025-12-24T08:28:18.402Z"
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 8,
+    "fields": {
+        "name": "Test Patient",
+        "phone": "1234567890",
+        "email": null,
+        "doctor": 6,
+        "department": null,
+        "preferred_date": "2025-12-25",
+        "preferred_time": "",
+        "message": "",
+        "status": "confirmed",
+        "created_at": "2025-12-25T13:09:30.427Z"
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 9,
+    "fields": {
+        "name": "Test Patient",
+        "phone": "1234567890",
+        "email": null,
+        "doctor": 6,
+        "department": null,
+        "preferred_date": "2025-12-25",
+        "preferred_time": "",
+        "message": "",
+        "status": "confirmed",
+        "created_at": "2025-12-25T13:09:45.851Z"
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 10,
+    "fields": {
+        "name": "Test Patient",
+        "phone": "1234567890",
+        "email": null,
+        "doctor": 6,
+        "department": null,
+        "preferred_date": "2025-12-25",
+        "preferred_time": "",
+        "message": "",
+        "status": "confirmed",
+        "created_at": "2025-12-25T13:09:58.271Z"
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 11,
+    "fields": {
+        "name": "Test Patient",
+        "phone": "1234567890",
+        "email": null,
+        "doctor": 6,
+        "department": null,
+        "preferred_date": "2025-12-25",
+        "preferred_time": "",
+        "message": "",
+        "status": "confirmed",
+        "created_at": "2025-12-25T13:12:48.445Z"
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 12,
+    "fields": {
+        "name": "R.K.Balasubramaniam",
+        "phone": "09444143646",
+        "email": "balasubramaniamrk1@gmail.com",
+        "doctor": 4,
+        "department": 7,
+        "preferred_date": "2025-12-27",
+        "preferred_time": "morning",
+        "message": "",
+        "status": "confirmed",
+        "created_at": "2025-12-26T04:48:21.368Z"
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 13,
+    "fields": {
+        "name": "Raman",
+        "phone": "1234567890",
+        "email": "raman@gmail.com",
+        "doctor": 1,
+        "department": 2,
+        "preferred_date": "2025-12-27",
+        "preferred_time": "Morning",
+        "message": "",
+        "status": "pending",
+        "created_at": "2025-12-27T02:40:28.418Z"
+    }
+},
+{
+    "model": "appointments.appointmentrequest",
+    "pk": 14,
+    "fields": {
+        "name": "Kannan",
+        "phone": "9568903445",
+        "email": null,
+        "doctor": 4,
+        "department": 5,
+        "preferred_date": "2025-12-27",
+        "preferred_time": "Evening",
+        "message": "",
+        "status": "pending",
+        "created_at": "2025-12-27T02:45:08.980Z"
+    }
+},
+{
+    "model": "appointments.consultation",
+    "pk": 1,
+    "fields": {
+        "appointment": 3,
+        "doctor_notes": "test notes",
+        "diagnosis": "Test Diagnosis",
+        "prescription": "Test rx",
+        "next_visit_date": null,
+        "pharmacy_status": "pending",
+        "consultation_date": "2025-12-21T09:22:32.614Z"
+    }
+},
+{
+    "model": "appointments.consultation",
+    "pk": 2,
+    "fields": {
+        "appointment": 4,
+        "doctor_notes": "thiijksdf",
+        "diagnosis": "abcdea",
+        "prescription": "cdef",
+        "next_visit_date": null,
+        "pharmacy_status": "pending",
+        "consultation_date": "2025-12-21T14:12:48.740Z"
+    }
+},
+{
+    "model": "appointments.consultation",
+    "pk": 3,
+    "fields": {
+        "appointment": 1,
+        "doctor_notes": "Please follow the dosage instructions",
+        "diagnosis": "Abcded",
+        "prescription": "Paracetamol - 1-0-1 - 2 days\nCrosin - 1-0-1 - 2 days",
+        "next_visit_date": null,
+        "pharmacy_status": "pending",
+        "consultation_date": "2025-12-24T05:33:18.964Z"
+    }
+},
+{
+    "model": "appointments.consultation",
+    "pk": 4,
+    "fields": {
+        "appointment": 5,
+        "doctor_notes": "Please follow the dosage instructions.",
+        "diagnosis": "test prescription",
+        "prescription": "Paracetamol - 1-0-1 - 2 days",
+        "next_visit_date": null,
+        "pharmacy_status": "dispensed",
+        "consultation_date": "2025-12-24T05:40:41.980Z"
+    }
+},
+{
+    "model": "appointments.consultation",
+    "pk": 5,
+    "fields": {
+        "appointment": 6,
+        "doctor_notes": "please follow dosage",
+        "diagnosis": "asdhlksdlksa",
+        "prescription": "Paracetamol - 1-0-1 - 2 days",
+        "next_visit_date": null,
+        "pharmacy_status": "dispensed",
+        "consultation_date": "2025-12-24T08:19:59.569Z"
+    }
+},
+{
+    "model": "appointments.consultation",
+    "pk": 6,
+    "fields": {
+        "appointment": 8,
+        "doctor_notes": "Rest",
+        "diagnosis": "Fever",
+        "prescription": "",
+        "next_visit_date": null,
+        "pharmacy_status": "dispensed",
+        "consultation_date": "2025-12-25T13:09:30.431Z"
+    }
+},
+{
+    "model": "appointments.consultation",
+    "pk": 7,
+    "fields": {
+        "appointment": 9,
+        "doctor_notes": "Rest",
+        "diagnosis": "Fever",
+        "prescription": "",
+        "next_visit_date": null,
+        "pharmacy_status": "dispensed",
+        "consultation_date": "2025-12-25T13:09:45.853Z"
+    }
+},
+{
+    "model": "appointments.consultation",
+    "pk": 8,
+    "fields": {
+        "appointment": 10,
+        "doctor_notes": "Rest",
+        "diagnosis": "Fever",
+        "prescription": "",
+        "next_visit_date": null,
+        "pharmacy_status": "dispensed",
+        "consultation_date": "2025-12-25T13:09:58.273Z"
+    }
+},
+{
+    "model": "appointments.consultation",
+    "pk": 9,
+    "fields": {
+        "appointment": 11,
+        "doctor_notes": "Rest",
+        "diagnosis": "Fever",
+        "prescription": "",
+        "next_visit_date": null,
+        "pharmacy_status": "dispensed",
+        "consultation_date": "2025-12-25T13:12:48.447Z"
+    }
+},
+{
+    "model": "appointments.consultation",
+    "pk": 10,
+    "fields": {
+        "appointment": 7,
+        "doctor_notes": "take dosage as prescribed",
+        "diagnosis": "Fever",
+        "prescription": "Paracetamol - 1-0-1 - 3 days",
+        "next_visit_date": null,
+        "pharmacy_status": "pending",
+        "consultation_date": "2025-12-25T13:29:22.318Z"
+    }
+},
+{
+    "model": "appointments.consultation",
+    "pk": 11,
+    "fields": {
+        "appointment": 2,
+        "doctor_notes": "please follow the dosage",
+        "diagnosis": "fever",
+        "prescription": "Amoxicillin 500mg - 1-1-1 - 3 days",
+        "next_visit_date": null,
+        "pharmacy_status": "dispensed",
+        "consultation_date": "2025-12-25T14:44:34.805Z"
+    }
+},
+{
+    "model": "appointments.prescriptionitem",
+    "pk": 1,
+    "fields": {
+        "consultation": 3,
+        "medicine_name": "Paracetamol",
+        "dosage": "1-0-1",
+        "duration": "2 days",
+        "instruction": "After food"
+    }
+},
+{
+    "model": "appointments.prescriptionitem",
+    "pk": 2,
+    "fields": {
+        "consultation": 3,
+        "medicine_name": "Crosin",
+        "dosage": "1-0-1",
+        "duration": "2 days",
+        "instruction": "Before food"
+    }
+},
+{
+    "model": "appointments.prescriptionitem",
+    "pk": 3,
+    "fields": {
+        "consultation": 4,
+        "medicine_name": "Paracetamol",
+        "dosage": "1-0-1",
+        "duration": "2 days",
+        "instruction": "After food"
+    }
+},
+{
+    "model": "appointments.prescriptionitem",
+    "pk": 4,
+    "fields": {
+        "consultation": 5,
+        "medicine_name": "Paracetamol",
+        "dosage": "1-0-1",
+        "duration": "2 days",
+        "instruction": "after food"
+    }
+},
+{
+    "model": "appointments.prescriptionitem",
+    "pk": 5,
+    "fields": {
+        "consultation": 6,
+        "medicine_name": "TestMeds 500mg",
+        "dosage": "1-0-1",
+        "duration": "5 days",
+        "instruction": ""
+    }
+},
+{
+    "model": "appointments.prescriptionitem",
+    "pk": 6,
+    "fields": {
+        "consultation": 7,
+        "medicine_name": "TestMeds 500mg",
+        "dosage": "1-0-1",
+        "duration": "5 days",
+        "instruction": ""
+    }
+},
+{
+    "model": "appointments.prescriptionitem",
+    "pk": 7,
+    "fields": {
+        "consultation": 8,
+        "medicine_name": "TestMeds 500mg",
+        "dosage": "1-0-1",
+        "duration": "5 days",
+        "instruction": ""
+    }
+},
+{
+    "model": "appointments.prescriptionitem",
+    "pk": 8,
+    "fields": {
+        "consultation": 9,
+        "medicine_name": "TestMeds 500mg",
+        "dosage": "1-0-1",
+        "duration": "5 days",
+        "instruction": ""
+    }
+},
+{
+    "model": "appointments.prescriptionitem",
+    "pk": 9,
+    "fields": {
+        "consultation": 10,
+        "medicine_name": "Paracetamol",
+        "dosage": "1-0-1",
+        "duration": "3 days",
+        "instruction": "After food"
+    }
+},
+{
+    "model": "appointments.prescriptionitem",
+    "pk": 10,
+    "fields": {
+        "consultation": 11,
+        "medicine_name": "Amoxicillin 500mg",
+        "dosage": "1-1-1",
+        "duration": "3 days",
+        "instruction": "after food"
+    }
+},
+{
+    "model": "staff_mgmt.shift",
+    "pk": 1,
+    "fields": {
+        "name": "General",
+        "start_time": "09:00:00",
+        "end_time": "18:00:00"
+    }
+},
+{
+    "model": "staff_mgmt.shift",
+    "pk": 2,
+    "fields": {
+        "name": "Noon",
+        "start_time": "14:00:00",
+        "end_time": "23:00:00"
+    }
+},
+{
+    "model": "staff_mgmt.shift",
+    "pk": 3,
+    "fields": {
+        "name": "Morning",
+        "start_time": "06:00:00",
+        "end_time": "15:00:00"
+    }
+},
+{
+    "model": "staff_mgmt.staffprofile",
+    "pk": 1,
+    "fields": {
+        "user": [
+            "balasubramaniam"
+        ],
+        "employee_id": "EMP001",
+        "department": "IT",
+        "designation": "Administrator",
+        "joining_date": "2025-12-23",
+        "shift": null
+    }
+},
+{
+    "model": "staff_mgmt.staffprofile",
+    "pk": 3,
+    "fields": {
+        "user": [
+            "nurse_mary"
+        ],
+        "employee_id": "EMP002",
+        "department": "General Medicine",
+        "designation": "Nurse",
+        "joining_date": "2025-12-24",
+        "shift": 1
+    }
+},
+{
+    "model": "staff_mgmt.staffprofile",
+    "pk": 4,
+    "fields": {
+        "user": [
+            "inventory_mgr"
+        ],
+        "employee_id": "EMP003",
+        "department": "Administration",
+        "designation": "Inventory Manager",
+        "joining_date": "2025-12-24",
+        "shift": 1
+    }
+},
+{
+    "model": "staff_mgmt.staffprofile",
+    "pk": 5,
+    "fields": {
+        "user": [
+            "dr_ariva"
+        ],
+        "employee_id": "DOC001",
+        "department": "Cardiology",
+        "designation": "Doctor",
+        "joining_date": "2025-12-24",
+        "shift": 2
+    }
+},
+{
+    "model": "staff_mgmt.staffprofile",
+    "pk": 6,
+    "fields": {
+        "user": [
+            "receptionist"
+        ],
+        "employee_id": "REC001",
+        "department": "Administration",
+        "designation": "Receptionist",
+        "joining_date": "2025-12-26",
+        "shift": null
+    }
+},
+{
+    "model": "staff_mgmt.staffprofile",
+    "pk": 7,
+    "fields": {
+        "user": [
+            "hadmin"
+        ],
+        "employee_id": "HA001",
+        "department": "Administration",
+        "designation": "Hospital Admin",
+        "joining_date": "2025-12-27",
+        "shift": 1
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 1,
+    "fields": {
+        "staff": 1,
+        "date": "2025-12-23",
+        "check_in": "13:41:39.301",
+        "check_out": "14:47:36.921",
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 2,
+    "fields": {
+        "staff": 1,
+        "date": "2025-12-23",
+        "check_in": "15:06:37.146",
+        "check_out": "15:06:58.807",
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 3,
+    "fields": {
+        "staff": 1,
+        "date": "2025-12-23",
+        "check_in": "15:07:32.247",
+        "check_out": "15:11:30.569",
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 4,
+    "fields": {
+        "staff": 1,
+        "date": "2025-12-23",
+        "check_in": "15:11:30.600",
+        "check_out": "15:11:54.524",
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 5,
+    "fields": {
+        "staff": 1,
+        "date": "2025-12-23",
+        "check_in": "15:11:54.556",
+        "check_out": "15:15:37.212",
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 6,
+    "fields": {
+        "staff": 1,
+        "date": "2025-12-23",
+        "check_in": "15:15:37.244",
+        "check_out": "15:16:01.445",
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 7,
+    "fields": {
+        "staff": 1,
+        "date": "2025-12-23",
+        "check_in": "15:16:01.479",
+        "check_out": null,
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 39,
+    "fields": {
+        "staff": 1,
+        "date": "2025-12-24",
+        "check_in": "03:37:02.441",
+        "check_out": null,
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 40,
+    "fields": {
+        "staff": 4,
+        "date": "2025-12-24",
+        "check_in": "04:07:40.411",
+        "check_out": "08:16:05.242",
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 41,
+    "fields": {
+        "staff": 5,
+        "date": "2025-12-24",
+        "check_in": "06:25:04.123",
+        "check_out": null,
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 42,
+    "fields": {
+        "staff": 4,
+        "date": "2025-12-24",
+        "check_in": "08:16:28.067",
+        "check_out": null,
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 43,
+    "fields": {
+        "staff": 5,
+        "date": "2025-12-26",
+        "check_in": "04:18:17.323",
+        "check_out": "04:18:39.343",
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 44,
+    "fields": {
+        "staff": 4,
+        "date": "2025-12-26",
+        "check_in": "04:23:36.550",
+        "check_out": "04:24:39.171",
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 45,
+    "fields": {
+        "staff": 4,
+        "date": "2025-12-26",
+        "check_in": "04:24:39.213",
+        "check_out": "04:31:29.908",
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 46,
+    "fields": {
+        "staff": 4,
+        "date": "2025-12-26",
+        "check_in": "04:34:42.429",
+        "check_out": "04:37:36.800",
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 47,
+    "fields": {
+        "staff": 5,
+        "date": "2025-12-26",
+        "check_in": "04:43:22.821",
+        "check_out": "04:44:20.081",
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 48,
+    "fields": {
+        "staff": 5,
+        "date": "2025-12-26",
+        "check_in": "04:44:20.119",
+        "check_out": "05:07:33.769",
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 49,
+    "fields": {
+        "staff": 1,
+        "date": "2025-12-26",
+        "check_in": "04:54:21.645",
+        "check_out": null,
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 50,
+    "fields": {
+        "staff": 6,
+        "date": "2025-12-26",
+        "check_in": "05:05:05.255",
+        "check_out": null,
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 51,
+    "fields": {
+        "staff": 5,
+        "date": "2025-12-26",
+        "check_in": "05:07:33.804",
+        "check_out": null,
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "staff_mgmt.attendance",
+    "pk": 52,
+    "fields": {
+        "staff": 7,
+        "date": "2025-12-27",
+        "check_in": "03:50:56.337",
+        "check_out": null,
+        "status": "present",
+        "is_late": false,
+        "notes": ""
+    }
+},
+{
+    "model": "inventory.vendor",
+    "pk": 1,
+    "fields": {
+        "name": "R.K.Balasubramaniam",
+        "contact_person": "R.K.Balasubramaniam",
+        "phone": "09444143646",
+        "email": "balasubramaniamrk1@gmail.com",
+        "website": "",
+        "address": "202-D1, Annai Aradhana, Ashtalakshmi nagar, Gudalore",
+        "rating": 5
+    }
+},
+{
+    "model": "inventory.vendor",
+    "pk": 2,
+    "fields": {
+        "name": "MedTech Supplies Inc.",
+        "contact_person": "",
+        "phone": "555-0123",
+        "email": "sales@medtech.com",
+        "website": "",
+        "address": "",
+        "rating": 0
+    }
+},
+{
+    "model": "inventory.equipmentcategory",
+    "pk": 1,
+    "fields": {
+        "name": "Scanning machine",
+        "description": ""
+    }
+},
+{
+    "model": "inventory.equipmentcategory",
+    "pk": 2,
+    "fields": {
+        "name": "Diagnostic Imaging",
+        "description": ""
+    }
+},
+{
+    "model": "inventory.equipment",
+    "pk": 1,
+    "fields": {
+        "category": 2,
+        "vendor": 2,
+        "name": "X-Ray Machine Model X",
+        "serial_number": "XR-2025-001",
+        "model_number": "",
+        "manufacturer": "",
+        "purchase_date": "2024-12-26",
+        "warranty_expiry": null,
+        "cost": "50000.00",
+        "useful_life": 5,
+        "location": "Radiology Room 1",
+        "status": "working",
+        "image": "",
+        "barcode_data": null,
+        "qr_code": "qr_codes/qr_XR-2025-001.png"
+    }
+},
+{
+    "model": "inventory.equipment",
+    "pk": 2,
+    "fields": {
+        "category": 1,
+        "vendor": 1,
+        "name": "CT Scanner Advanced",
+        "serial_number": "CT-SCAN-002",
+        "model_number": "",
+        "manufacturer": "",
+        "purchase_date": null,
+        "warranty_expiry": null,
+        "cost": "150000.00",
+        "useful_life": 5,
+        "location": "Radiology Room 2",
+        "status": "working",
+        "image": "",
+        "barcode_data": null,
+        "qr_code": "qr_codes/qr_CT-SCAN-002.png"
+    }
+},
+{
+    "model": "inventory.maintenancecontract",
+    "pk": 1,
+    "fields": {
+        "equipment": 1,
+        "vendor": 2,
+        "provider_name": "MedTech Supplies Inc.",
+        "contract_start": "2025-01-05",
+        "contract_end": "2026-01-05",
+        "cost": "2000.00",
+        "support_contact": "support@medtech.com",
+        "terms": ""
+    }
+},
+{
+    "model": "inventory.maintenancecontract",
+    "pk": 2,
+    "fields": {
+        "equipment": 2,
+        "vendor": 1,
+        "provider_name": "R.K.Balasubramaniam",
+        "contract_start": "2025-01-15",
+        "contract_end": "2026-01-15",
+        "cost": "5000.00",
+        "support_contact": "support@medtech.com",
+        "terms": ""
+    }
+},
+{
+    "model": "inventory.consumable",
+    "pk": 1,
+    "fields": {
+        "category": null,
+        "vendor": 2,
+        "name": "X-Ray Film",
+        "quantity_in_stock": 5,
+        "minimum_stock_level": 20,
+        "unit": "sheets",
+        "barcode_data": null,
+        "cost_per_unit": "0.00",
+        "last_updated": "2025-12-26T05:21:30.290Z"
+    }
+},
+{
+    "model": "inventory.consumable",
+    "pk": 2,
+    "fields": {
+        "category": null,
+        "vendor": 1,
+        "name": "Syringes (5ml)",
+        "quantity_in_stock": 50,
+        "minimum_stock_level": 100,
+        "unit": "units",
+        "barcode_data": null,
+        "cost_per_unit": "0.00",
+        "last_updated": "2025-12-26T05:42:40.285Z"
+    }
+},
+{
+    "model": "pharmacy.medicinecategory",
+    "pk": 1,
+    "fields": {
+        "name": "Antibiotics",
+        "description": ""
+    }
+},
+{
+    "model": "pharmacy.medicine",
+    "pk": 1,
+    "fields": {
+        "category": 1,
+        "vendor": null,
+        "name": "Amoxicillin 500mg",
+        "generic_name": "",
+        "manufacturer": "",
+        "description": "",
+        "dosage_form": "Tablet",
+        "schedule_type": "OTC",
+        "reorder_level": 10
+    }
+},
+{
+    "model": "pharmacy.medicine",
+    "pk": 2,
+    "fields": {
+        "category": 1,
+        "vendor": null,
+        "name": "TestMeds 500mg",
+        "generic_name": "",
+        "manufacturer": "",
+        "description": "",
+        "dosage_form": "Tablet",
+        "schedule_type": "OTC",
+        "reorder_level": 10
+    }
+},
+{
+    "model": "pharmacy.batch",
+    "pk": 1,
+    "fields": {
+        "medicine": 1,
+        "vendor": 1,
+        "batch_number": "Batch001",
+        "expiry_date": "2026-10-31",
+        "quantity": 3,
+        "buy_price": "7.00",
+        "sell_price": "10.00",
+        "received_date": "2025-12-24",
+        "stock_entry": null
+    }
+},
+{
+    "model": "pharmacy.batch",
+    "pk": 5,
+    "fields": {
+        "medicine": 2,
+        "vendor": null,
+        "batch_number": "B123",
+        "expiry_date": "2026-12-25",
+        "quantity": 87,
+        "buy_price": "5.00",
+        "sell_price": "10.00",
+        "received_date": "2025-12-25",
+        "stock_entry": null
+    }
+},
+{
+    "model": "pharmacy.batch",
+    "pk": 6,
+    "fields": {
+        "medicine": 1,
+        "vendor": 2,
+        "batch_number": "Batch 2",
+        "expiry_date": "2026-01-26",
+        "quantity": 99,
+        "buy_price": "100.00",
+        "sell_price": "125.00",
+        "received_date": "2025-12-26",
+        "stock_entry": 1
+    }
+},
+{
+    "model": "pharmacy.batch",
+    "pk": 7,
+    "fields": {
+        "medicine": 2,
+        "vendor": 1,
+        "batch_number": "Batch 3",
+        "expiry_date": "2026-01-31",
+        "quantity": 10,
+        "buy_price": "10.00",
+        "sell_price": "12.00",
+        "received_date": "2025-12-26",
+        "stock_entry": 2
+    }
+},
+{
+    "model": "pharmacy.sale",
+    "pk": 1,
+    "fields": {
+        "patient_name": "",
+        "doctor": null,
+        "consultation": null,
+        "admission": null,
+        "date": "2025-12-24T14:19:20.299Z",
+        "invoice": null,
+        "status": "completed"
+    }
+},
+{
+    "model": "pharmacy.sale",
+    "pk": 2,
+    "fields": {
+        "patient_name": "Test Patient",
+        "doctor": 6,
+        "consultation": 6,
+        "admission": null,
+        "date": "2025-12-25T13:09:30.440Z",
+        "invoice": 1,
+        "status": "completed"
+    }
+},
+{
+    "model": "pharmacy.sale",
+    "pk": 3,
+    "fields": {
+        "patient_name": "Test Patient",
+        "doctor": 6,
+        "consultation": 7,
+        "admission": null,
+        "date": "2025-12-25T13:09:45.858Z",
+        "invoice": 2,
+        "status": "completed"
+    }
+},
+{
+    "model": "pharmacy.sale",
+    "pk": 4,
+    "fields": {
+        "patient_name": "Test Patient",
+        "doctor": 6,
+        "consultation": 8,
+        "admission": null,
+        "date": "2025-12-25T13:09:58.278Z",
+        "invoice": 3,
+        "status": "completed"
+    }
+},
+{
+    "model": "pharmacy.sale",
+    "pk": 5,
+    "fields": {
+        "patient_name": "Test Patient",
+        "doctor": 6,
+        "consultation": 9,
+        "admission": null,
+        "date": "2025-12-25T13:12:48.453Z",
+        "invoice": 4,
+        "status": "completed"
+    }
+},
+{
+    "model": "pharmacy.sale",
+    "pk": 6,
+    "fields": {
+        "patient_name": "Ramesh",
+        "doctor": 4,
+        "consultation": 5,
+        "admission": null,
+        "date": "2025-12-25T13:15:59.256Z",
+        "invoice": 5,
+        "status": "completed"
+    }
+},
+{
+    "model": "pharmacy.sale",
+    "pk": 8,
+    "fields": {
+        "patient_name": "",
+        "doctor": null,
+        "consultation": null,
+        "admission": null,
+        "date": "2025-12-25T13:26:20.850Z",
+        "invoice": 7,
+        "status": "completed"
+    }
+},
+{
+    "model": "pharmacy.sale",
+    "pk": 9,
+    "fields": {
+        "patient_name": "Sudersan",
+        "doctor": 1,
+        "consultation": 4,
+        "admission": null,
+        "date": "2025-12-25T13:27:48.761Z",
+        "invoice": 8,
+        "status": "completed"
+    }
+},
+{
+    "model": "pharmacy.sale",
+    "pk": 10,
+    "fields": {
+        "patient_name": "R.K.Balasubramaniam",
+        "doctor": 1,
+        "consultation": 11,
+        "admission": null,
+        "date": "2025-12-25T14:45:06.110Z",
+        "invoice": 9,
+        "status": "completed"
+    }
+},
+{
+    "model": "pharmacy.sale",
+    "pk": 11,
+    "fields": {
+        "patient_name": "Test patient",
+        "doctor": 1,
+        "consultation": null,
+        "admission": 2,
+        "date": "2025-12-25T15:38:48.590Z",
+        "invoice": 10,
+        "status": "completed"
+    }
+},
+{
+    "model": "pharmacy.sale",
+    "pk": 12,
+    "fields": {
+        "patient_name": "Test patient 2 ",
+        "doctor": 2,
+        "consultation": null,
+        "admission": 3,
+        "date": "2025-12-25T15:42:26.907Z",
+        "invoice": 11,
+        "status": "completed"
+    }
+},
+{
+    "model": "pharmacy.sale",
+    "pk": 13,
+    "fields": {
+        "patient_name": "",
+        "doctor": null,
+        "consultation": null,
+        "admission": null,
+        "date": "2025-12-26T07:03:21.282Z",
+        "invoice": 12,
+        "status": "completed"
+    }
+},
+{
+    "model": "pharmacy.saleitem",
+    "pk": 1,
+    "fields": {
+        "sale": 1,
+        "batch": 1,
+        "quantity": 1,
+        "price_at_sale": "10.00"
+    }
+},
+{
+    "model": "pharmacy.saleitem",
+    "pk": 5,
+    "fields": {
+        "sale": 5,
+        "batch": 5,
+        "quantity": 10,
+        "price_at_sale": "10.00"
+    }
+},
+{
+    "model": "pharmacy.saleitem",
+    "pk": 6,
+    "fields": {
+        "sale": 6,
+        "batch": 1,
+        "quantity": 1,
+        "price_at_sale": "10.00"
+    }
+},
+{
+    "model": "pharmacy.saleitem",
+    "pk": 7,
+    "fields": {
+        "sale": 6,
+        "batch": 5,
+        "quantity": 1,
+        "price_at_sale": "10.00"
+    }
+},
+{
+    "model": "pharmacy.saleitem",
+    "pk": 10,
+    "fields": {
+        "sale": 8,
+        "batch": 1,
+        "quantity": 1,
+        "price_at_sale": "10.00"
+    }
+},
+{
+    "model": "pharmacy.saleitem",
+    "pk": 11,
+    "fields": {
+        "sale": 8,
+        "batch": 5,
+        "quantity": 1,
+        "price_at_sale": "10.00"
+    }
+},
+{
+    "model": "pharmacy.saleitem",
+    "pk": 12,
+    "fields": {
+        "sale": 9,
+        "batch": 1,
+        "quantity": 1,
+        "price_at_sale": "10.00"
+    }
+},
+{
+    "model": "pharmacy.saleitem",
+    "pk": 13,
+    "fields": {
+        "sale": 9,
+        "batch": 5,
+        "quantity": 1,
+        "price_at_sale": "10.00"
+    }
+},
+{
+    "model": "pharmacy.saleitem",
+    "pk": 14,
+    "fields": {
+        "sale": 10,
+        "batch": 1,
+        "quantity": 1,
+        "price_at_sale": "10.00"
+    }
+},
+{
+    "model": "pharmacy.saleitem",
+    "pk": 15,
+    "fields": {
+        "sale": 11,
+        "batch": 1,
+        "quantity": 1,
+        "price_at_sale": "10.00"
+    }
+},
+{
+    "model": "pharmacy.saleitem",
+    "pk": 16,
+    "fields": {
+        "sale": 12,
+        "batch": 1,
+        "quantity": 1,
+        "price_at_sale": "10.00"
+    }
+},
+{
+    "model": "pharmacy.saleitem",
+    "pk": 17,
+    "fields": {
+        "sale": 13,
+        "batch": 6,
+        "quantity": 1,
+        "price_at_sale": "125.00"
+    }
+},
+{
+    "model": "pharmacy.purchaseorder",
+    "pk": 1,
+    "fields": {
+        "vendor": 2,
+        "date": "2025-12-26",
+        "expected_delivery_date": "2025-12-26",
+        "status": "received",
+        "total_amount": "10000.00",
+        "created_at": "2025-12-26T06:05:28.101Z",
+        "created_by": [
+            "admin"
+        ]
+    }
+},
+{
+    "model": "pharmacy.purchaseorder",
+    "pk": 2,
+    "fields": {
+        "vendor": 1,
+        "date": "2025-12-26",
+        "expected_delivery_date": "2025-12-26",
+        "status": "received",
+        "total_amount": "100.00",
+        "created_at": "2025-12-26T06:12:45.045Z",
+        "created_by": [
+            "admin"
+        ]
+    }
+},
+{
+    "model": "pharmacy.purchaseorderitem",
+    "pk": 1,
+    "fields": {
+        "purchase_order": 1,
+        "medicine": 1,
+        "quantity_requested": 100,
+        "unit_price_expected": "100.00"
+    }
+},
+{
+    "model": "pharmacy.purchaseorderitem",
+    "pk": 2,
+    "fields": {
+        "purchase_order": 2,
+        "medicine": 2,
+        "quantity_requested": 10,
+        "unit_price_expected": "10.00"
+    }
+},
+{
+    "model": "pharmacy.stockentry",
+    "pk": 1,
+    "fields": {
+        "purchase_order": 1,
+        "vendor": 2,
+        "date": "2025-12-26",
+        "vendor_invoice_number": "Invoice-001",
+        "vendor_invoice_date": "2025-12-26",
+        "received_by": [
+            "admin"
+        ],
+        "created_at": "2025-12-26T06:10:00.816Z"
+    }
+},
+{
+    "model": "pharmacy.stockentry",
+    "pk": 2,
+    "fields": {
+        "purchase_order": 2,
+        "vendor": 1,
+        "date": "2025-12-26",
+        "vendor_invoice_number": "INV 002",
+        "vendor_invoice_date": "2025-12-26",
+        "received_by": [
+            "admin"
+        ],
+        "created_at": "2025-12-26T06:30:48.566Z"
+    }
+},
+{
+    "model": "billing.invoice",
+    "pk": 1,
+    "fields": {
+        "patient_name": "Test Patient",
+        "doctor": 6,
+        "consultation": 6,
+        "admission": null,
+        "date": "2025-12-25T13:09:30.438Z",
+        "total_amount": "100.00",
+        "status": "paid",
+        "source": "pharmacy"
+    }
+},
+{
+    "model": "billing.invoice",
+    "pk": 2,
+    "fields": {
+        "patient_name": "Test Patient",
+        "doctor": 6,
+        "consultation": 7,
+        "admission": null,
+        "date": "2025-12-25T13:09:45.857Z",
+        "total_amount": "100.00",
+        "status": "pending",
+        "source": "pharmacy"
+    }
+},
+{
+    "model": "billing.invoice",
+    "pk": 3,
+    "fields": {
+        "patient_name": "Test Patient",
+        "doctor": 6,
+        "consultation": 8,
+        "admission": null,
+        "date": "2025-12-25T13:09:58.277Z",
+        "total_amount": "100.00",
+        "status": "pending",
+        "source": "pharmacy"
+    }
+},
+{
+    "model": "billing.invoice",
+    "pk": 4,
+    "fields": {
+        "patient_name": "Test Patient",
+        "doctor": 6,
+        "consultation": 9,
+        "admission": null,
+        "date": "2025-12-25T13:12:48.452Z",
+        "total_amount": "100.00",
+        "status": "pending",
+        "source": "pharmacy"
+    }
+},
+{
+    "model": "billing.invoice",
+    "pk": 5,
+    "fields": {
+        "patient_name": "Ramesh",
+        "doctor": 4,
+        "consultation": 5,
+        "admission": null,
+        "date": "2025-12-25T13:15:59.253Z",
+        "total_amount": "20.00",
+        "status": "pending",
+        "source": "pharmacy"
+    }
+},
+{
+    "model": "billing.invoice",
+    "pk": 7,
+    "fields": {
+        "patient_name": "",
+        "doctor": null,
+        "consultation": null,
+        "admission": null,
+        "date": "2025-12-25T13:26:20.848Z",
+        "total_amount": "20.00",
+        "status": "pending",
+        "source": "pharmacy"
+    }
+},
+{
+    "model": "billing.invoice",
+    "pk": 8,
+    "fields": {
+        "patient_name": "Sudersan",
+        "doctor": 1,
+        "consultation": 4,
+        "admission": null,
+        "date": "2025-12-25T13:27:48.760Z",
+        "total_amount": "20.00",
+        "status": "pending",
+        "source": "pharmacy"
+    }
+},
+{
+    "model": "billing.invoice",
+    "pk": 9,
+    "fields": {
+        "patient_name": "R.K.Balasubramaniam",
+        "doctor": 1,
+        "consultation": 11,
+        "admission": null,
+        "date": "2025-12-25T14:45:06.108Z",
+        "total_amount": "10.00",
+        "status": "pending",
+        "source": "pharmacy"
+    }
+},
+{
+    "model": "billing.invoice",
+    "pk": 10,
+    "fields": {
+        "patient_name": "Test patient",
+        "doctor": 1,
+        "consultation": null,
+        "admission": 2,
+        "date": "2025-12-25T15:38:48.587Z",
+        "total_amount": "10.00",
+        "status": "paid",
+        "source": "pharmacy"
+    }
+},
+{
+    "model": "billing.invoice",
+    "pk": 11,
+    "fields": {
+        "patient_name": "Test patient 2 ",
+        "doctor": 2,
+        "consultation": null,
+        "admission": 3,
+        "date": "2025-12-25T15:42:26.904Z",
+        "total_amount": "10.00",
+        "status": "paid",
+        "source": "pharmacy"
+    }
+},
+{
+    "model": "billing.invoice",
+    "pk": 12,
+    "fields": {
+        "patient_name": "",
+        "doctor": null,
+        "consultation": null,
+        "admission": null,
+        "date": "2025-12-26T07:03:21.279Z",
+        "total_amount": "125.00",
+        "status": "paid",
+        "source": "pharmacy"
+    }
+},
+{
+    "model": "billing.invoiceitem",
+    "pk": 1,
+    "fields": {
+        "invoice": 5,
+        "description": "Amoxicillin 500mg (Batch: Batch001)",
+        "quantity": 1,
+        "unit_price": "10.00",
+        "line_total": "10.00"
+    }
+},
+{
+    "model": "billing.invoiceitem",
+    "pk": 2,
+    "fields": {
+        "invoice": 5,
+        "description": "TestMeds 500mg (Batch: B123)",
+        "quantity": 1,
+        "unit_price": "10.00",
+        "line_total": "10.00"
+    }
+},
+{
+    "model": "billing.invoiceitem",
+    "pk": 5,
+    "fields": {
+        "invoice": 7,
+        "description": "Amoxicillin 500mg (Batch: Batch001)",
+        "quantity": 1,
+        "unit_price": "10.00",
+        "line_total": "10.00"
+    }
+},
+{
+    "model": "billing.invoiceitem",
+    "pk": 6,
+    "fields": {
+        "invoice": 7,
+        "description": "TestMeds 500mg (Batch: B123)",
+        "quantity": 1,
+        "unit_price": "10.00",
+        "line_total": "10.00"
+    }
+},
+{
+    "model": "billing.invoiceitem",
+    "pk": 7,
+    "fields": {
+        "invoice": 8,
+        "description": "Amoxicillin 500mg (Batch: Batch001)",
+        "quantity": 1,
+        "unit_price": "10.00",
+        "line_total": "10.00"
+    }
+},
+{
+    "model": "billing.invoiceitem",
+    "pk": 8,
+    "fields": {
+        "invoice": 8,
+        "description": "TestMeds 500mg (Batch: B123)",
+        "quantity": 1,
+        "unit_price": "10.00",
+        "line_total": "10.00"
+    }
+},
+{
+    "model": "billing.invoiceitem",
+    "pk": 9,
+    "fields": {
+        "invoice": 9,
+        "description": "Amoxicillin 500mg (Batch: Batch001)",
+        "quantity": 1,
+        "unit_price": "10.00",
+        "line_total": "10.00"
+    }
+},
+{
+    "model": "billing.invoiceitem",
+    "pk": 10,
+    "fields": {
+        "invoice": 10,
+        "description": "Amoxicillin 500mg (Batch: Batch001)",
+        "quantity": 1,
+        "unit_price": "10.00",
+        "line_total": "10.00"
+    }
+},
+{
+    "model": "billing.invoiceitem",
+    "pk": 11,
+    "fields": {
+        "invoice": 11,
+        "description": "Amoxicillin 500mg (Batch: Batch001)",
+        "quantity": 1,
+        "unit_price": "10.00",
+        "line_total": "10.00"
+    }
+},
+{
+    "model": "billing.invoiceitem",
+    "pk": 12,
+    "fields": {
+        "invoice": 12,
+        "description": "Amoxicillin 500mg (Batch: Batch 2)",
+        "quantity": 1,
+        "unit_price": "125.00",
+        "line_total": "125.00"
+    }
+},
+{
+    "model": "admissions.ward",
+    "pk": 1,
+    "fields": {
+        "name": "General Ward A",
+        "ward_type": "general",
+        "floor": "1st Floor"
+    }
+},
+{
+    "model": "admissions.ward",
+    "pk": 2,
+    "fields": {
+        "name": "ICU 1",
+        "ward_type": "icu",
+        "floor": "2nd Floor"
+    }
+},
+{
+    "model": "admissions.bed",
+    "pk": 1,
+    "fields": {
+        "ward": 1,
+        "bed_number": "G-1",
+        "status": "available",
+        "price_per_day": "500.00"
+    }
+},
+{
+    "model": "admissions.bed",
+    "pk": 2,
+    "fields": {
+        "ward": 1,
+        "bed_number": "G-2",
+        "status": "available",
+        "price_per_day": "500.00"
+    }
+},
+{
+    "model": "admissions.bed",
+    "pk": 3,
+    "fields": {
+        "ward": 1,
+        "bed_number": "G-3",
+        "status": "available",
+        "price_per_day": "500.00"
+    }
+},
+{
+    "model": "admissions.bed",
+    "pk": 4,
+    "fields": {
+        "ward": 1,
+        "bed_number": "G-4",
+        "status": "available",
+        "price_per_day": "500.00"
+    }
+},
+{
+    "model": "admissions.bed",
+    "pk": 5,
+    "fields": {
+        "ward": 1,
+        "bed_number": "G-5",
+        "status": "available",
+        "price_per_day": "500.00"
+    }
+},
+{
+    "model": "admissions.bed",
+    "pk": 6,
+    "fields": {
+        "ward": 2,
+        "bed_number": "ICU-1",
+        "status": "available",
+        "price_per_day": "2000.00"
+    }
+},
+{
+    "model": "admissions.bed",
+    "pk": 7,
+    "fields": {
+        "ward": 2,
+        "bed_number": "ICU-2",
+        "status": "available",
+        "price_per_day": "2000.00"
+    }
+},
+{
+    "model": "admissions.admission",
+    "pk": 1,
+    "fields": {
+        "patient_name": "John Doe IPD",
+        "patient_phone": "9998887776",
+        "patient_age": null,
+        "gender": "",
+        "ward": 1,
+        "bed": 1,
+        "doctor": 1,
+        "admission_date": "2025-12-25T14:51:55.175Z",
+        "discharge_date": "2025-12-25T15:35:59.866Z",
+        "discharge_notes": "Patient discharged",
+        "status": "discharged"
+    }
+},
+{
+    "model": "admissions.admission",
+    "pk": 2,
+    "fields": {
+        "patient_name": "Test patient",
+        "patient_phone": "9555536888",
+        "patient_age": 45,
+        "gender": "M",
+        "ward": 1,
+        "bed": 1,
+        "doctor": 1,
+        "admission_date": "2025-12-25T15:38:10.157Z",
+        "discharge_date": "2025-12-25T15:39:16.566Z",
+        "discharge_notes": "Discharging now",
+        "status": "discharged"
+    }
+},
+{
+    "model": "admissions.admission",
+    "pk": 3,
+    "fields": {
+        "patient_name": "Test patient 2 ",
+        "patient_phone": "9444143646",
+        "patient_age": 40,
+        "gender": "M",
+        "ward": 1,
+        "bed": 1,
+        "doctor": 2,
+        "admission_date": "2025-12-25T15:42:15.899Z",
+        "discharge_date": "2025-12-26T04:05:40.751Z",
+        "discharge_notes": "Discharged",
+        "status": "discharged"
+    }
+}
+]
