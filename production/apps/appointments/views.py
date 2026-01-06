@@ -11,8 +11,25 @@ def book_appointment(request):
     if request.method == 'POST':
         form = AppointmentRequestForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Your appointment request has been received. We will call you shortly to confirm.')
+            appointment = form.save(commit=False)
+            
+            # --- Patient ID Integration ---
+            from core.models import Patient
+            phone = form.cleaned_data.get('phone')
+            name = form.cleaned_data.get('name')
+            
+            # Try to find existing patient by phone
+            patient, created = Patient.objects.get_or_create(
+                phone=phone,
+                defaults={'name': name}
+            )
+            
+            # If found but name is different, we might want to update or ignore. 
+            # For now, we trust the phone number as the unique identifier.
+            appointment.patient = patient
+            appointment.save()
+
+            messages.success(request, f'Your appointment request has been received. Patient ID: {patient.patient_id}')
             return redirect('book_appointment')
     else:
         # Check for prefill data from GET request (e.g. from Staff Dashboard)
@@ -216,7 +233,9 @@ def consultation_view(request, pk):
             return redirect('doctor_console')
 
         diagnosis = request.POST.get('diagnosis', '').strip()
+        diagnosis = request.POST.get('diagnosis', '').strip()
         notes = request.POST.get('notes', '').strip()
+        doctor_comments = request.POST.get('doctor_comments', '').strip()
         
         # Lists from dynamic form
         medicine_names = request.POST.getlist('medicine_name[]')
@@ -234,6 +253,7 @@ def consultation_view(request, pk):
             appointment=appointment,
             diagnosis=diagnosis,
             doctor_notes=notes,
+            doctor_comments=doctor_comments,
             # We will populate the string field as a summary
             prescription="\n".join([f"{m} - {d} - {dur}" for m, d, dur in zip(medicine_names, dosages, durations)])
         )

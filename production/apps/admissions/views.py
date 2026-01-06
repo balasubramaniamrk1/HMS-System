@@ -5,6 +5,7 @@ from .models import Ward, Bed, Admission
 from doctors.models import Doctor
 from apps.core.validators import validate_phone_number
 from django.core.exceptions import ValidationError
+from core.models import Patient
 
 @login_required
 def admission_dashboard(request):
@@ -51,7 +52,18 @@ def admit_patient(request):
             try:
                 validate_phone_number(phone)
                 
+                # Find or Create Patient
+                patient, created = Patient.objects.get_or_create(
+                    phone=phone,
+                    defaults={
+                        'name': name,
+                        'age': age,
+                        'gender': gender
+                    }
+                )
+
                 Admission.objects.create(
+                    patient=patient, # Link centralized Patient
                     patient_name=name,
                     patient_phone=phone,
                     patient_age=age,

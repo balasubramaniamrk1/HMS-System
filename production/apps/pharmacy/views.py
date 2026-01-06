@@ -9,6 +9,8 @@ from appointments.models import Consultation
 from admissions.models import Admission
 from doctors.models import Doctor
 import json
+from .models import Medicine, Batch, Sale, SaleItem, MedicineReturn, MedicineReturnItem
+from .forms import MedicineForm
 
 @login_required
 def pharmacy_dashboard(request):
@@ -266,6 +268,11 @@ def purchase_order_list(request):
     return render(request, 'pharmacy/purchase_order_list.html', {'orders': orders})
 
 @login_required
+def purchase_order_detail(request, pk):
+    po = get_object_or_404(PurchaseOrder, pk=pk)
+    return render(request, 'pharmacy/purchase_order_detail.html', {'po': po})
+
+@login_required
 def purchase_order_create(request):
     if request.method == 'POST':
         vendor_id = request.POST.get('vendor')
@@ -323,6 +330,9 @@ def stock_entry_create(request):
     po = None
     if po_id:
         po = get_object_or_404(PurchaseOrder, id=po_id)
+        if po.status in ['received', 'cancelled']:
+             messages.error(request, f"Purchase Order #{po.id} is already {po.status}. Cannot process GRN.")
+             return redirect('pharmacy:purchase_order_list')
     
     if request.method == 'POST':
         vendor_id = request.POST.get('vendor')
@@ -383,10 +393,16 @@ def stock_entry_create(request):
     
     vendors = Vendor.objects.all()
     medicines = Medicine.objects.all().order_by('name')
+    # Use 'ordered' status for POs waiting to be received. 'pending' might be drafts.
+    # If your workflow uses 'pending' as 'sent to vendor', include that too.
+    # Looking at purchase_order_create, it sets status='ordered'.
+    pending_pos = PurchaseOrder.objects.filter(status__in=['pending', 'ordered']).order_by('-date')
+    
     return render(request, 'pharmacy/stock_entry_form.html', {
         'vendors': vendors, 
         'medicines': medicines,
-        'po': po
+        'po': po,
+        'pending_pos': pending_pos
     })
 
 # ==========================
@@ -495,9 +511,16 @@ def expiry_report(request):
         quantity__gt=0
     ).select_related('medicine').order_by('expiry_date')
     
+    # Also fetch expired items that were returned (not restocked)
+    from .models import MedicineReturnItem
+    expired_returns = MedicineReturnItem.objects.filter(
+        is_restocked=False
+    ).select_related('medicine_return', 'sale_item__batch__medicine').order_by('-medicine_return__return_date')
+
     return render(request, 'pharmacy/report_expiry.html', {
         'batches': expiring_batches,
-        'days': days
+        'days': days,
+        'expired_returns': expired_returns
     })
 
 @login_required
@@ -517,3 +540,126 @@ def stock_report(request):
         'batches': batches_list,
         'total_stock_value': total_stock_value
     })
+
+@login_required
+def return_medicine(request):
+    if request.method == 'POST':
+        sale_id = request.POST.get('sale_id')
+        reason = request.POST.get('reason')
+        items_json = request.POST.get('return_items', '[]')
+        
+        try:
+            with transaction.atomic():
+                sale = get_object_or_404(Sale, id=sale_id)
+                items_data = json.loads(items_json)
+                
+                if not items_data:
+                    messages.error(request, "No items selected for return.")
+                    return redirect('pharmacy:report_sales')
+
+                # Create Return Record
+                med_return = MedicineReturn.objects.create(
+                    sale=sale,
+                    reason=reason,
+                    processed_by=request.user,
+                    total_refund_amount=0
+                )
+                
+                total_refund = 0
+                
+                for item in items_data:
+                    sale_item_id = item['sale_item_id']
+                    qty_to_return = int(item['quantity'])
+                    is_restock = item.get('is_restock', True)
+                    
+                    sale_item = SaleItem.objects.select_for_update().get(id=sale_item_id)
+                    
+                    if qty_to_return > sale_item.quantity:
+                         raise ValueError(f"Cannot return more than sold quantity for {sale_item.batch.medicine.name}")
+                    
+                    # Calculate refund (Simple logic: linear proportion of sold price)
+                    refund_val = sale_item.price_at_sale * qty_to_return
+                    total_refund += refund_val
+                    
+                    MedicineReturnItem.objects.create(
+                        medicine_return=med_return,
+                        sale_item=sale_item,
+                        quantity_returned=qty_to_return,
+                        refund_amount=refund_val,
+                        is_restocked=is_restock
+                    )
+                
+                med_return.total_refund_amount = total_refund
+                med_return.save()
+                
+                # Optional: Update Invoice to show refund or create Credit Note?
+                # For now, just logging the return in Pharmacy system.
+                
+                messages.success(request, f"Return processed successfully. Refund Due: {total_refund}")
+                return redirect('pharmacy:report_sales')
+                
+        except Exception as e:
+            messages.error(request, f"Error processing return: {str(e)}")
+            return redirect('pharmacy:report_sales')
+            
+    # GET: If sale_id provided, show return form
+    sale_id = request.GET.get('sale_id')
+    if sale_id:
+        sale = get_object_or_404(Sale, id=sale_id)
+        return render(request, 'pharmacy/return_form.html', {'sale': sale})
+        
+    return redirect('pharmacy:report_sales')
+
+@login_required
+def returns_report(request):
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+    reason_filter = request.GET.get('reason', '')
+    
+    returns = MedicineReturnItem.objects.select_related(
+        'medicine_return', 'sale_item', 'sale_item__batch__medicine'
+    ).order_by('-medicine_return__return_date')
+    
+    if start_date:
+        returns = returns.filter(medicine_return__return_date__date__gte=start_date)
+    if end_date:
+        returns = returns.filter(medicine_return__return_date__date__lte=end_date)
+    if reason_filter:
+        if reason_filter == 'expired':
+            returns = returns.filter(medicine_return__reason__icontains='expire')
+        elif reason_filter == 'damaged':
+            returns = returns.filter(medicine_return__reason__icontains='damage')
+        else:
+             returns = returns.filter(medicine_return__reason__icontains=reason_filter)
+
+    total_refund = sum(item.refund_amount for item in returns)
+    
+    context = {
+        'returns': returns,
+        'start_date': start_date,
+        'end_date': end_date,
+        'reason_filter': reason_filter,
+        'total_refund': total_refund
+    }
+    return render(request, 'pharmacy/report_returns.html', context)
+
+@login_required
+def medicine_create(request):
+    # RBAC: Allow Hospital Admins, Pharmacy Managers (Inventory Managers)
+    allowed_groups = ['Hospital Admins', 'Inventory Managers']
+    is_allowed = request.user.groups.filter(name__in=allowed_groups).exists() or request.user.is_superuser
+    
+    if not is_allowed:
+        messages.error(request, "Access Denied: You do not have permission to add new medicines.")
+        return redirect('pharmacy:dashboard')
+
+    if request.method == 'POST':
+        form = MedicineForm(request.POST)
+        if form.is_valid():
+            medicine = form.save()
+            messages.success(request, f"Medicine '{medicine.name}' added successfully.")
+            return redirect('pharmacy:stock_list')
+    else:
+        form = MedicineForm()
+    
+    return render(request, 'pharmacy/medicine_form.html', {'form': form})

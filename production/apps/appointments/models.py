@@ -1,5 +1,6 @@
 from django.db import models
 from doctors.models import Doctor, Department
+from core.models import Patient
 
 class AppointmentRequest(models.Model):
     STATUS_CHOICES = (
@@ -11,6 +12,8 @@ class AppointmentRequest(models.Model):
 
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=15)
+    phone = models.CharField(max_length=15)
+    patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, null=True, blank=True)
     email = models.EmailField(blank=True, null=True)
     doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True, blank=True)
     department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True)
@@ -26,6 +29,7 @@ class AppointmentRequest(models.Model):
 class Consultation(models.Model):
     appointment = models.OneToOneField(AppointmentRequest, on_delete=models.CASCADE, related_name='consultation')
     doctor_notes = models.TextField(help_text="Observations by the doctor")
+    doctor_comments = models.TextField(help_text="Additional comments for the report", blank=True)
     diagnosis = models.TextField()
     prescription = models.TextField(help_text="Medicines and dosage (legacy text field)", blank=True)
     next_visit_date = models.DateField(null=True, blank=True)

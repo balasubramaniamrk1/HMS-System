@@ -106,32 +106,28 @@
 
     <!-- Global Message Modal -->
     {% if messages %}
-    <div id="messageModal" class="modal-overlay">
+    <div id="messageContainer" style="position: fixed; top: 20px; right: 20px; z-index: 9999; width: 350px;">
         {% for message in messages %}
-        <div class="modal-box {{ message.tags }}">
-            <div class="modal-title">
-                {% if message.tags == 'error' %}Error
-                {% elif message.tags == 'success' %}Success
-                {% elif message.tags == 'warning' %}Warning
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show shadow-lg"
+            role="alert">
+            <strong>
+                {% if message.tags == 'error' %}<i class="fas fa-exclamation-circle mr-2"></i>Error
+                {% elif message.tags == 'success' %}<i class="fas fa-check-circle mr-2"></i>Success
+                {% elif message.tags == 'warning' %}<i class="fas fa-exclamation-triangle mr-2"></i>Warning
                 {% else %}Notification{% endif %}
-            </div>
-            <div class="modal-message">{{ message }}</div>
-            <button class="modal-btn"
-                onclick="this.closest('.modal-box').style.display='none'; checkAllClosed()">OK</button>
+            </strong><br>
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         {% endfor %}
     </div>
     <script>
-        function checkAllClosed() {
-            const boxes = document.querySelectorAll('.modal-box');
-            let allClosed = true;
-            boxes.forEach(box => {
-                if (box.style.display !== 'none') allClosed = false;
-            });
-            if (allClosed) {
-                document.getElementById('messageModal').style.display = 'none';
-            }
-        }
+        // Auto-dismiss messages after 5 seconds
+        setTimeout(function () {
+            $('.alert').alert('close');
+        }, 5000);
     </script>
     {% endif %}
 

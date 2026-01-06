@@ -1,5 +1,33 @@
 from django.db import models
 
+class Patient(models.Model):
+    GENDER_CHOICES = [
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+    ]
+    patient_id = models.CharField(max_length=20, unique=True, editable=False)
+    name = models.CharField(max_length=200)
+    phone = models.CharField(max_length=15, unique=True)
+    age = models.PositiveIntegerField(null=True, blank=True)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, blank=True)
+    address = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.patient_id:
+            last_patient = Patient.objects.order_by('-id').first()
+            if last_patient:
+                last_id_num = int(last_patient.patient_id.split('-')[-1])
+                new_id_num = last_id_num + 1
+            else:
+                new_id_num = 1
+            self.patient_id = f"HMS-P-{new_id_num:04d}"
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.name} ({self.patient_id}) - {self.phone}"
+
 class HealthPackage(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
@@ -39,3 +67,14 @@ class CareerApplication(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.position}"
+
+class GalleryImage(models.Model):
+    image = models.ImageField(upload_to='gallery/')
+    caption = models.CharField(max_length=200, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-uploaded_at']
+
+    def __str__(self):
+        return self.caption or f"Image {self.id}"

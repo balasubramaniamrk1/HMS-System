@@ -7,6 +7,7 @@ from django.http import HttpResponse
 
 from .models import Equipment, MaintenanceContract, Vendor, Consumable, MaintenanceLog
 from .forms import EquipmentForm, AMCForm, VendorForm, ConsumableForm, MaintenanceLogForm
+from pharmacy.models import Batch  # Import Batch model
 
 @login_required
 @group_required('Inventory Managers')
@@ -28,15 +29,35 @@ def amc_expiry_dashboard(request):
     # Low Stock Consumables
     low_stock_items = [c for c in Consumable.objects.all() if c.is_low_stock()]
     
+    # Expiring Medicines (from Pharmacy)
+    expiring_medicines = Batch.objects.filter(
+        expiry_date__gte=today,
+        expiry_date__lte=next_30_days,
+        quantity__gt=0
+    ).select_related('medicine').order_by('expiry_date')
+    
     total_equipment = Equipment.objects.count()
     under_repair = Equipment.objects.filter(status='repair').count()
+    total_vendors = Vendor.objects.count()
+    total_consumables = Consumable.objects.count()
     
+    # Counts for badges
+    amc_alert_count = len(expiring_amcs) + len(expired_amcs)
+    low_stock_count = len(low_stock_items)
+    med_expiry_count = expiring_medicines.count()
+
     context = {
         'expiring_amcs': expiring_amcs,
         'expired_amcs': expired_amcs,
         'total_equipment': total_equipment,
         'under_repair': under_repair,
         'low_stock_items': low_stock_items,
+        'expiring_medicines': expiring_medicines,
+        'amc_alert_count': amc_alert_count,
+        'low_stock_count': low_stock_count,
+        'med_expiry_count': med_expiry_count,
+        'total_vendors': total_vendors,
+        'total_consumables': total_consumables,
     }
     return render(request, 'inventory/dashboard.html', context)
 

@@ -70,11 +70,18 @@
             <div style="font-size: 1.1rem; color: #2d3748; white-space: pre-wrap;">{{ consultation.prescription }}</div>
         </div>
 
-        {% if consultation.notes %}
+        {% if consultation.doctor_comments %}
+        <div style="background: #f8fafc; padding: 30px; border-radius: 10px; margin-bottom: 30px;">
+            <h5 style="color: #4a5568; font-weight: 700; margin-bottom: 15px;">Doctor Comments</h5>
+            <p style="font-size: 1.1rem; color: #2d3748;">{{ consultation.doctor_comments }}</p>
+        </div>
+        {% endif %}
+
+        {% if consultation.doctor_notes %}
         <div style="background: #fff; border: 1px solid #e2e8f0; padding: 30px; border-radius: 10px;">
             <h5 style="color: #718096; font-weight: 600; margin-bottom: 15px; font-size: 0.95rem;">Additional Notes
                 (Internal)</h5>
-            <p style="color: #718096;">{{ consultation.notes }}</p>
+            <p style="color: #718096;">{{ consultation.doctor_notes }}</p>
         </div>
         {% endif %}
 

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from doctors.models import Doctor
 from appointments.models import Consultation
+from core.models import Patient
 
 # PharmaVendor model removed. Using inventory.Vendor.
 
@@ -55,6 +56,7 @@ class Batch(models.Model):
         return f"{self.medicine.name} - {self.batch_number} (Exp: {self.expiry_date})"
 
 class Sale(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, null=True, blank=True)
     patient_name = models.CharField(max_length=200, blank=True, help_text="Patient Name (if not registered)")
     # Optional link to registered patient if you have a Patient model, user didn't specify one in requirements so keeping it simple for POS
     doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True, blank=True, help_text="Prescribing Doctor")
@@ -128,5 +130,30 @@ class StockEntry(models.Model):
 
 # Update Batch to link to StockEntry (Monkey patch or just add field if Batch was defined above?)
 # Batch is defined above. We need to add the field to the Batch class definition.
-# Since I am appending, I will fail if I don't modify the existing Batch class.
-# I will use a separate replace_file_content for Batch.
+
+class MedicineReturn(models.Model):
+    sale = models.ForeignKey(Sale, on_delete=models.CASCADE, related_name='returns')
+    return_date = models.DateTimeField(default=timezone.now)
+    total_refund_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    reason = models.TextField(blank=True)
+    processed_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f"Return for Sale #{self.sale.id} on {self.return_date.date()}"
+
+class MedicineReturnItem(models.Model):
+    medicine_return = models.ForeignKey(MedicineReturn, on_delete=models.CASCADE, related_name='items')
+    sale_item = models.ForeignKey(SaleItem, on_delete=models.CASCADE)
+    quantity_returned = models.PositiveIntegerField()
+    refund_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    is_restocked = models.BooleanField(default=True, help_text="If true, quantity is added back to batch")
+
+    def save(self, *args, **kwargs):
+        if not self.pk and self.is_restocked:
+            # Add stock back to batch
+            self.sale_item.batch.quantity += self.quantity_returned
+            self.sale_item.batch.save()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Ret: {self.quantity_returned} x {self.sale_item.batch.medicine.name}"

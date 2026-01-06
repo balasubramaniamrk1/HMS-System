@@ -3,15 +3,21 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from doctors.models import Department, Doctor
-from .models import HealthPackage, ContactMessage
+from .models import HealthPackage, ContactMessage, GalleryImage, CareerApplication
 from apps.core.validators import validate_phone_number
 from django.core.exceptions import ValidationError
 
 @login_required
+def gallery(request):
+    images = GalleryImage.objects.all()
+    return render(request, 'core/gallery.html', {'images': images})
+
 def role_based_redirect(request):
     user = request.user
     if user.is_superuser:
-        return redirect('/admin/')
+        return redirect('admin_dashboard')
+    elif user.groups.filter(name='Hospital Admins').exists():
+        return redirect('admin_dashboard')
     elif user.groups.filter(name='Inventory Managers').exists():
         return redirect('inventory_list')
     elif user.groups.filter(name='Doctors').exists():

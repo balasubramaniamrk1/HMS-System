@@ -9,6 +9,22 @@
                     <h5 class="mb-0 font-weight-bold"><i class="fas fa-box-open mr-2"></i>Stock Entry (GRN)</h5>
                 </div>
                 <div class="card-body p-4">
+                    {% if not po and pending_pos %}
+                    <div class="alert alert-warning">
+                        <label class="font-weight-bold"><i class="fas fa-file-invoice mr-2"></i>Select Pending Purchase
+                            Order to Receive:</label>
+                        <select class="form-control"
+                            onchange="if(this.value) window.location.href='?po_id='+this.value">
+                            <option value="">-- Select Pending PO (or proceed with Direct Entry below) --</option>
+                            {% for p in pending_pos %}
+                            <option value="{{ p.id }}">PO #{{ p.id }} - {{ p.vendor.name }} (Date: {{ p.date }})
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <hr>
+                    {% endif %}
+
                     {% if po %}
                     <div class="alert alert-info">
                         Receiving items against <strong>PO #{{ po.id }}</strong>

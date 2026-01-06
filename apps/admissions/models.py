@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from doctors.models import Doctor
+from core.models import Patient
 
 class Ward(models.Model):
     WARD_TYPES = [
@@ -38,6 +39,7 @@ class Admission(models.Model):
     
     # Linking to string 'appointments.AppointmentRequest' or just Patient Name for simplicity now
     # Ideally link to a Patient model. Using Name/Phone for now as in Appointments.
+    patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, null=True, blank=True)
     patient_name = models.CharField(max_length=200)
     patient_phone = models.CharField(max_length=20)
     patient_age = models.IntegerField(null=True, blank=True)
