@@ -16,20 +16,21 @@ def book_appointment(request):
             # --- Patient ID Integration ---
             from core.models import Patient
             phone = form.cleaned_data.get('phone')
-            name = form.cleaned_data.get('name')
             
-            # Try to find existing patient by phone
-            patient, created = Patient.objects.get_or_create(
-                phone=phone,
-                defaults={'name': name}
-            )
+            # Look up existing patient (DO NOT CREATE NEW ONE)
+            patient = Patient.objects.filter(phone=phone).first()
             
-            # If found but name is different, we might want to update or ignore. 
-            # For now, we trust the phone number as the unique identifier.
-            appointment.patient = patient
+            if patient:
+                appointment.patient = patient
+                msg = f'Your appointment request has been received. Your Patient ID is {patient.patient_id}'
+            else:
+                # New patient: Defer creation
+                appointment.patient = None
+                msg = 'Your appointment request has been received. A Patient ID will be assigned after consultation.'
+                
             appointment.save()
 
-            messages.success(request, f'Your appointment request has been received. Patient ID: {patient.patient_id}')
+            messages.success(request, msg)
             return redirect('book_appointment')
     else:
         # Check for prefill data from GET request (e.g. from Staff Dashboard)
@@ -247,6 +248,21 @@ def consultation_view(request, pk):
         if not diagnosis or not notes:
             messages.error(request, "Diagnosis and Notes are mandatory.")
             return render(request, 'appointments/consultation_form.html', {'appointment': appointment})
+
+        # --- Defer Patient Creation Logic ---
+        if not appointment.patient:
+            from core.models import Patient
+            # Create the patient record now
+            patient, created = Patient.objects.get_or_create(
+                phone=appointment.phone,
+                defaults={
+                    'name': appointment.name,
+                    'email': appointment.email
+                }
+            )
+            appointment.patient = patient
+            appointment.save()
+            messages.info(request, f"New Patient Record Created. ID: {patient.patient_id}")
 
         # Create Consultation
         consultation = Consultation.objects.create(
