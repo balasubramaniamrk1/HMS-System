@@ -92,12 +92,15 @@
                     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 20px;">
                         <tr>
                             <td width="60%" valign="top">
-                                <h1 style="color: #800000; margin: 0; font-size: 24px; font-weight: bold;">HMS Hospital
+                                <h1 style="color: #800000; margin: 0; font-size: 24px; font-weight: bold;">Raagavaa
+                                    Hospital
                                 </h1>
-                                <p style="margin: 2px 0;">Ajmer Road, Jaipur, Rajasthan 301202</p>
-                                <p style="margin: 2px 0;">Phone: +91 9981278197</p>
+                                <p style="margin: 2px 0;">New Pet, Krishnagiri, Tamil Nadu 635002</p>
+                                <p style="margin: 2px 0;">Phone: 095669 26840</p>
                                 <p style="margin: 2px 0;">GSTIN: 08AALCR2857A1ZD</p>
                                 <p style="margin: 2px 0;">PAN Number: AVHPC9999A</p>
+
+                                <div style="margin-top: 10px; border-top: 1px solid #000; padding-top: 5px;"></div>
                             </td>
                             <td width="40%" valign="top" align="right">
                                 <h2 style="margin: 0 0 10px 0; font-size: 20px;">TAX INVOICE</h2>
@@ -170,8 +173,8 @@
                                 <td style="border: 1px solid #000; padding: 8px; text-align: center;">{{ item.quantity                                     }}</td>
                                 <td style="border: 1px solid #000; padding: 8px; text-align: right;">Rs. {{                                     item.unit_price|floatformat:2 }}</td>
                                 <td style="border: 1px solid #000; padding: 8px; text-align: right;">
-                                    <strong>5%</strong><br>
-                                    <small style="color: #666; font-size: 11px;">(Rs. {% widthratio item.line_total 100                                         5 %}.00)</small>
+                                    <strong>{{ item.tax_rate|floatformat:0 }}%</strong><br>
+                                    <small style="color: #666; font-size: 11px;">(Rs. {{ item.line_total|floatformat:2                                         }})</small>
                                 </td>
                                 <td style="border: 1px solid #000; padding: 8px; text-align: right;">Rs. {{                                     item.line_total|floatformat:2 }}</td>
                             </tr>
@@ -193,7 +196,8 @@
                             <!-- Bank Details -->
                             <td width="55%" valign="top" style="border-right: 1px solid #000; padding: 15px;">
                                 <h3 style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Bank Details</h3>
-                                <p style="margin: 2px 0; font-size: 14px;"><strong>Account holder:</strong> HMS Hospital
+                                <p style="margin: 2px 0; font-size: 14px;"><strong>Account holder:</strong> Raagavaa
+                                    Hospital
                                 </p>
                                 <p style="margin: 2px 0; font-size: 14px;"><strong>Account number:</strong> 38028101723
                                 </p>
@@ -203,8 +207,8 @@
                                 <p style="margin: 2px 0; font-size: 14px;"><strong>IFSC code:</strong> SBIN0002836</p>
 
                                 <div style="margin-top: 20px;">
-                                    <strong>Terms & Conditions:</strong>
-                                    <ol style="margin: 5px 0 0 20px; padding: 0; font-size: 12px;">
+                                    <strong style="display: block; margin-bottom: 5px;">Terms & Conditions:</strong>
+                                    <ol style="margin: 0; padding-left: 20px; font-size: 12px; color: #444;">
                                         <li>Customer will pay the GST.</li>
                                         <li>Goods once sold will not be taken back.</li>
                                         <li>Subject to Jaipur Jurisdiction.</li>
@@ -239,7 +243,7 @@
 
                                 <div style="text-align: right; padding: 60px 20px 20px 20px;">
                                     <p style="margin: 0; font-size: 12px;">Authorised Signatory For</p>
-                                    <strong style="color: #800000; font-size: 14px;">HMS Hospital</strong>
+                                    <strong style="color: #800000; font-size: 14px;">Raagavaa Hospital</strong>
                                 </div>
                             </td>
                         </tr>
@@ -258,7 +262,7 @@
 <style>
     @media print {
         @page {
-            margin: 0;
+            margin: 10mm;
             size: auto;
         }
 
@@ -284,12 +288,14 @@
             height: 100%;
             background: white;
             z-index: 9999;
-            padding: 40px;
         }
 
         div.print-wrapper {
             border: 2px solid #000;
-            min-height: 95vh;
+            height: 98vh;
+            /* Adjusted from min-height: 95vh to fixed height to force border */
+            box-sizing: border-box;
+            padding: 10px;
         }
 
         /* Container Ref Resets */
