@@ -4,88 +4,130 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="container hero-content">
-        <h1>World-Class Healthcare, <br> Right Here.</h1>
-        <p>Advanced multi-speciality care with a patient-first approach. Trusted by thousands.</p>
-        <div class="hero-actions">
-            <a href="{% url 'book_appointment' %}" class="btn-primary">Book an Appointment</a>
-            <a href="{% url 'doctor_list' %}" class="btn-secondary">Find a Doctor</a>
+<section class="hero-modern fade-in">
+    <div class="container">
+        <div class="hero-text">
+            <span class="badge-premium">Top Rated Hospital</span>
+            <h1>World-Class Care, <span class="highlight-text">Personalized for You</span></h1>
+            <p>Experience the future of healthcare with our advanced multi-speciality facilities and expert medical
+                professionals.</p>
+            <div class="hero-btns">
+                <a href="{% url 'book_appointment' %}" class="btn btn-primary btn-lg">Book Appointment <i
+                        class="fas fa-arrow-right ml-2"></i></a>
+                <a href="{% url 'doctor_list' %}" class="btn btn-outline-primary btn-lg ml-3">Find Specialist</a>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p>Specialists</p>
+                </div>
+                <div class="stat-item">
+                    <h3>10k+</h3>
+                    <p>Happy Patients</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Emergency Support</p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image-wrapper">
+            <img src="{% static 'img/hero_homepage_v9.png' %}" alt="Raagavaa Hospital Reception">
         </div>
     </div>
 </section>
 
-<section class="quick-links container">
+<section class="services-modern container">
+    <div class="section-title text-center mb-5">
+        <span class="sub-title">What We Offer</span>
+        <h2>Comprehensive Healthcare Services</h2>
+        <div class="title-line"></div>
+    </div>
+
     <div class="grid-3">
-        <div class="card highlight-card">
-            <h3>Emergency 24x7</h3>
-            <p>Immediate care when it matters most.</p>
-            <a href="tel:+911234567890" class="link-arrow">Call Ambulance &rarr;</a>
+        <div class="card service-card">
+            <div class="icon-circle bg-gradient">
+                <i class="fas fa-stethoscope"></i>
+            </div>
+            <h3>Expert Consultation</h3>
+            <p>Connect with top-tier specialists across various departments for precise diagnosis.</p>
+            <a href="{% url 'doctor_list' %}" class="link-text">Find a Doctor</a>
         </div>
-        <div class="card highlight-card">
-            <h3>Our Specialities</h3>
-            <p>Centers of Excellence in Cardiology, Oncology, and more.</p>
-            <a href="#" class="link-arrow">View Departments &rarr;</a>
+        <div class="card service-card">
+            <div class="icon-circle bg-gradient">
+                <i class="fas fa-procedures"></i>
+            </div>
+            <h3>Modern Facilities</h3>
+            <p>State-of-the-art operating theatres and comfortable recovery rooms.</p>
+            <a href="#" class="link-text">Explore Facilities</a>
         </div>
-        <div class="card highlight-card">
-            <h3>Patient Guide</h3>
-            <p>Visiting hours, insurance, and admission details.</p>
-            <a href="#" class="link-arrow">Learn More &rarr;</a>
+        <div class="card service-card">
+            <div class="icon-circle bg-gradient">
+                <i class="fas fa-ambulance"></i>
+            </div>
+            <h3>24/7 Emergency</h3>
+            <p>Rapid response ambulance and trauma care units always ready for you.</p>
+            <a href="tel:+1234567890" class="link-text text-secondary">Call Emergency</a>
         </div>
     </div>
 </section>
 
 {% if departments %}
-<section class="featured-depts container section-padding">
-    <div class="section-header">
-        <h2>Centers of Excellence</h2>
-        <a href="#" class="view-all">View All Specialities</a>
-    </div>
-    <div class="grid-4">
-        {% for dept in departments %}
-        <div class="dept-card">
-            <div class="icon-box">
-                {% if dept.icon %}
-                <img src="{{ dept.icon.url }}" alt="{{ dept.name }}">
-                {% else %}
-                <span class="placeholder-icon">{{ dept.name|slice:":1" }}</span>
-                {% endif %}
+<section class="depts-modern section-padding bg-light-alt">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-5">
+            <div>
+                <span class="sub-title">Centers of Excellence</span>
+                <h2>Specialized Departments</h2>
             </div>
-            <h3>{{ dept.name }}</h3>
-            <p>{{ dept.description|truncatewords:10 }}</p>
-            <a href="#" class="learn-more">Explore</a>
+            <a href="{% url 'department_list' %}" class="btn btn-outline-primary">View All</a>
         </div>
-        {% endfor %}
+
+        <div class="grid-4">
+            {% for dept in departments %}
+            <div class="card dept-card-modern">
+                <div class="dept-icon">
+                    {% if dept.icon %}
+                    <img src="{{ dept.icon.url }}" alt="{{ dept.name }}">
+                    {% else %}
+                    <span class="placeholder-icon">{{ dept.name|slice:":1" }}</span>
+                    {% endif %}
+                </div>
+                <h4>{{ dept.name }}</h4>
+                <p>{{ dept.description|truncatewords:8 }}</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 {% endif %}
 
 {% if doctors %}
-<section class="featured-doctors bg-light section-padding">
-    <div class="container">
-        <div class="section-header">
-            <h2>Our Experts</h2>
-            <a href="#" class="view-all">Find a Doctor</a>
-        </div>
-        <div class="grid-4">
-            {% for doc in doctors %}
-            <div class="doctor-card">
-                <div class="doc-img">
-                    {% if doc.photo %}
-                    <img src="{{ doc.photo.url }}" alt="{{ doc.name }}">
-                    {% else %}
-                    <div class="placeholder-doc-img"></div>
-                    {% endif %}
-                </div>
-                <div class="doc-info">
-                    <h4>{{ doc.name }}</h4>
-                    <span class="speciality">{{ doc.specialization }}</span>
-                    <p class="qualification">{{ doc.qualifications }}</p>
-                    <a href="#" class="btn-outline-sm">Profile</a>
-                </div>
+<section class="doctors-modern container section-padding">
+    <div class="section-title text-center mb-5">
+        <span class="sub-title">Meet Our Team</span>
+        <h2>Trusted Medical Experts</h2>
+        <div class="title-line"></div>
+    </div>
+
+    <div class="grid-4">
+        {% for doc in doctors %}
+        <div class="card doctor-card-modern">
+            <div class="doc-img-wrapper">
+                {% if doc.photo %}
+                <img src="{{ doc.photo.url }}" alt="{{ doc.name }}">
+                {% else %}
+                <div class="placeholder-doc-img"></div>
+                {% endif %}
             </div>
-            {% endfor %}
+            <div class="doc-body">
+                <h5>{{ doc.name }}</h5>
+                <span class="speciality-badge">{{ doc.specialization }}</span>
+                <a href="#" class="btn-sm-profile">View Profile</a>
+            </div>
         </div>
+        {% endfor %}
     </div>
 </section>
 {% endif %}
@@ -93,54 +135,163 @@
 
 {% block extra_css %}
 <style>
-    /* Hero Section */
-    .hero {
-        background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
-        padding: 80px 0;
-        text-align: center;
-        border-bottom: 1px solid #eee;
+    /* Modern Hero Section - Split Layout */
+    .hero-modern {
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 50px 0;
+        min-height: 700px;
+        position: relative;
+        overflow: hidden;
     }
 
-    .hero h1 {
+    .hero-modern .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-text {
+        flex: 1;
+        max-width: 550px;
+        color: #0e2a47;
+        /* Dark text for light background */
+    }
+
+    .hero-image-wrapper {
+        flex: 1.3;
+        position: relative;
+        height: 600px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        border: 5px solid white;
+        transform: translateX(30px);
+        /* Move image slightly right */
+    }
+
+    .hero-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .badge-premium {
+        background: rgba(14, 42, 71, 0.1);
+        color: var(--primary-color);
+        padding: 5px 15px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+
+    .hero-modern h1 {
         font-size: 3.5rem;
         font-weight: 800;
-        color: var(--text-color);
+        line-height: 1.1;
         margin-bottom: 20px;
-        line-height: 1.2;
+        color: #0e2a47;
     }
 
-    .hero p {
-        font-size: 1.25rem;
-        color: #555;
-        margin-bottom: 40px;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
+    .highlight-text {
+        color: var(--secondary-color);
     }
 
-    .hero-actions {
+    .hero-modern p {
+        font-size: 1.2rem;
+        opacity: 0.8;
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    .stats-row {
         display: flex;
-        justify-content: center;
-        gap: 20px;
+        gap: 40px;
+        margin-top: 50px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding-top: 30px;
     }
 
-    .btn-secondary {
-        background-color: transparent;
-        border: 2px solid var(--primary-color);
+    .stat-item h3 {
+        font-size: 2.5rem;
         color: var(--primary-color);
-        padding: 10px 20px;
-        border-radius: var(--radius);
-        text-decoration: none;
+        margin-bottom: 5px;
+        font-weight: 800;
+        text-shadow: none;
+        /* Removed shadow for clean look on white */
+    }
+
+    .stat-item p {
+        font-size: 1rem;
+        margin-bottom: 0;
+        opacity: 1;
+        color: #555;
         font-weight: 600;
-        transition: all 0.3s;
+        text-shadow: none;
+        letter-spacing: 0.5px;
     }
 
-    .btn-secondary:hover {
-        background-color: var(--primary-color);
-        color: white;
+    /* Services Section */
+    .services-modern {
+        margin-bottom: 80px;
     }
 
-    /* Grids */
+    .section-title h2 {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .sub-title {
+        color: var(--secondary-color);
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+    }
+
+    .title-line {
+        width: 60px;
+        height: 4px;
+        background: var(--secondary-color);
+        margin: 15px auto 40px;
+        border-radius: 2px;
+    }
+
+    .service-card {
+        text-align: center;
+        padding: 40px 20px;
+        border: 1px solid #eee;
+    }
+
+    .icon-circle {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+    }
+
+    .link-text {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+        margin-top: 20px;
+        display: inline-block;
+    }
+
     .grid-3 {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -153,157 +304,84 @@
         gap: 30px;
     }
 
-    /* Quick Links */
-    .quick-links {
-        transform: translateY(-40px);
+    /* Depts Modern */
+    .bg-light-alt {
+        background-color: #F1FAEE;
     }
 
-    .card {
-        background: white;
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: var(--shadow-md);
-        transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-    }
-
-    .highlight-card h3 {
-        color: var(--primary-color);
-        margin-bottom: 10px;
-    }
-
-    .link-arrow {
-        color: var(--secondary-color);
-        text-decoration: none;
-        font-weight: 600;
-        margin-top: 15px;
-        display: inline-block;
-    }
-
-    /* Sections */
     .section-padding {
         padding: 80px 0;
     }
 
-    .bg-light {
-        background-color: #f0f4f8;
-    }
-
-    .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 40px;
-    }
-
-    .section-header h2 {
-        font-size: 2rem;
-        color: #222;
-    }
-
-    .view-all {
-        color: var(--primary-color);
-        text-decoration: none;
-        font-weight: 600;
-    }
-
-    /* Dept Card */
-    .dept-card {
-        background: white;
+    .dept-card-modern {
         padding: 25px;
-        border-radius: var(--radius);
-        border: 1px solid #eee;
-        text-align: center;
-        transition: box-shadow 0.3s;
+        transition: all 0.3s;
+        border-bottom: 4px solid transparent;
     }
 
-    .dept-card:hover {
-        box-shadow: var(--shadow-md);
-        border-color: transparent;
+    .dept-card-modern:hover {
+        border-bottom-color: var(--secondary-color);
     }
 
-    .icon-box {
-        margin-bottom: 15px;
+    .dept-icon {
         height: 60px;
-        width: 60px;
-        background: var(--light-bg);
-        border-radius: 50%;
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .dept-icon img {
+        height: 100%;
+    }
+
+    .placeholder-icon {
+        font-size: 2rem;
         color: var(--primary-color);
-        font-size: 1.5rem;
+        font-weight: bold;
     }
 
-    /* Doctor Card */
-    .doctor-card {
-        background: white;
-        border-radius: 12px;
+    /* Doctors Modern */
+    .doctor-card-modern {
         overflow: hidden;
-        box-shadow: var(--shadow-sm);
     }
 
-    .doc-img {
+    .doc-img-wrapper {
         height: 250px;
-        background-color: #ddd;
-        overflow: hidden;
+        background: #ddd;
+        position: relative;
     }
 
-    .doc-img img {
+    .doc-img-wrapper img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
 
-    .placeholder-doc-img {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to bottom, #ccc, #aaa);
-    }
-
-    .doc-info {
+    .doc-body {
         padding: 20px;
+        text-align: center;
     }
 
-    .doc-info h4 {
-        margin-bottom: 5px;
-        color: #333;
-    }
-
-    .speciality {
-        color: var(--secondary-color);
-        font-size: 0.9rem;
-        font-weight: 600;
+    .speciality-badge {
         display: block;
-        margin-bottom: 10px;
-    }
-
-    .qualification {
-        color: #777;
+        color: var(--accent-color);
         font-size: 0.85rem;
+        font-weight: 600;
         margin-bottom: 15px;
     }
 
-    .btn-outline-sm {
-        display: inline-block;
+    .btn-sm-profile {
+        font-size: 0.85rem;
+        color: var(--text-color);
         border: 1px solid #ddd;
         padding: 5px 15px;
         border-radius: 20px;
         text-decoration: none;
-        color: #555;
-        font-size: 0.85rem;
         transition: all 0.2s;
     }
 
-    .btn-outline-sm:hover {
+    .btn-sm-profile:hover {
+        background: var(--primary-color);
+        color: white;
         border-color: var(--primary-color);
-        color: var(--primary-color);
     }
 </style>
 {% endblock %}

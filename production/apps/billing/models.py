@@ -26,11 +26,28 @@ class Invoice(models.Model):
     def __str__(self):
         return f"Invoice #{self.id} - {self.patient_name} - {self.status}"
 
+    @property
+    def tax_amount(self):
+        return sum([(item.line_total * item.tax_rate / 100) for item in self.items.all()])
+
+    @property
+    def grand_total(self):
+        return self.total_amount + self.tax_amount
+
+    @property
+    def cgst(self):
+        return self.tax_amount / 2
+
+    @property
+    def sgst(self):
+        return self.tax_amount / 2
+
 class InvoiceItem(models.Model):
     invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE, related_name='items')
     description = models.CharField(max_length=200)
     quantity = models.PositiveIntegerField(default=1)
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    tax_rate = models.DecimalField(max_digits=5, decimal_places=2, default=5.00)
     line_total = models.DecimalField(max_digits=10, decimal_places=2)
     
     def save(self, *args, **kwargs):

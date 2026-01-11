@@ -35,12 +35,14 @@
                         {% for person in staff_members %}
                         <tr>
                             <td>{{ person.employee_id }}</td>
-                            <td>{{ person.user.get_full_name }}</td>
+                            <td>{{ person.user.get_full_name|default:person.user.username }}</td>
                             <td>{{ person.department }}</td>
                             <td>{{ person.designation }}</td>
                             <td>
                                 {% if person.shift %}
-                                {{ person.shift.name }} ({{ person.shift.start_time|time:"H:i" }} - {{ person.shift.end_time|time:"H:i" }})
+                                {{ person.shift.name }}
+                                ({{ person.shift.start_time|time:'H:i' }} -
+                                {{ person.shift.end_time|time:'H:i' }})
                                 {% else %}
                                 <span class="text-muted">Not Assigned</span>
                                 {% endif %}

@@ -7,18 +7,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}HMS{% endblock %} | Multi-Speciality Hospital</title>
-
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap 4.5 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.1">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.7">
     {% block extra_css %}{% endblock %}
 </head>
 
@@ -26,83 +18,53 @@
 
     <header>
         <div class="container">
-            <nav>
-                <a href="/" class="brand">HealthPlus</a>
-                <div class="nav-links">
-                    <a href="/">Home</a>
-                    <a href="{% url 'about' %}">About Us</a>
-                    <a href="{% url 'gallery' %}">Gallery</a>
-                    <a href="{% url 'package_list' %}">Health Packages</a>
-                    <a href="{% url 'department_list' %}">Specialities</a>
+            <nav class="navbar">
+                <a href="/" class="brand"><i class="fas fa-heartbeat mr-2"></i>HealthPlus</a>
+                <div class="nav-menu">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="{% url 'about' %}" class="nav-link">About</a>
+                    <a href="{% url 'department_list' %}" class="nav-link">Center of Excellence</a>
+                    <a href="{% url 'doctor_list' %}" class="nav-link">Doctors</a>
+                    <a href="{% url 'package_list' %}" class="nav-link">Packages</a>
 
-                    <a href="{% url 'doctor_list' %}">Doctors</a>
-                    <a href="{% url 'post_list' %}">News</a>
-                    <a href="{% url 'contact' %}">Contact</a>
-
-                    {% if user.is_authenticated %}
-                    <div class="dropdown">
-                        <a href="#" class="dropbtn">Manage ▼</a>
-                        <div class="dropdown-content">
-                            <!-- Common for all Staff -->
-                            {% if user|has_group:"Staff" %}
-                            <a href="{% url 'staff_dashboard' %}">Staff Appointment Dashboard</a>
-                            <a href="{% url 'staff_attendance' %}">View Attendance History</a>
-                            {% endif %}
-
-                            <!-- Hospital Admin -->
-                            {% if user|has_group:"Hospital Admins" or user.is_superuser %}
-                            <a href="{% url 'admin_dashboard' %}">Hospital Administration</a>
-                            <a href="{% url 'admin_attendance_list' %}">Admin Attendance History</a>
-                            {% endif %}
-
-                            <!-- Admission / Front Desk -->
-                            <a href="{% url 'admissions:dashboard' %}">Admission Desk (IPD)</a>
-                            <a href="{% url 'billing:dashboard' %}">Billing Dashboard</a>
-
-                            <!-- Restricted Modules -->
-                            {% if user|has_group:"Pharmacist" or user.is_superuser %}
-                            <a href="{% url 'pharmacy:dashboard' %}">Pharmacy Dashboard</a>
-                            <a href="{% url 'pharmacy:pos' %}">POS / Dispense</a>
-                            <a href="{% url 'pharmacy:purchase_order_list' %}">Purchase Orders (PO)</a>
-                            <a href="{% url 'pharmacy:reports_dashboard' %}">Reports & Analytics</a>
-                            <a href="{% url 'pharmacy:stock_list' %}">Stock Inventory</a>
-                            {% endif %}
-
-                            {% if user|has_group:"Inventory Managers" or user.is_superuser %}
-                            <a href="{% url 'inventory_dashboard' %}">Inventory Dashboard</a>
-                            <a href="{% url 'amc_list' %}">AMC Contracts</a>
-                            {% endif %}
-
-                            {% if user.doctor_profile %}
-                            <a href="{% url 'doctor_console' %}">Doctor Console</a>
-                            {% endif %}
-
-                            {% if user.doctor_profile or user.is_superuser %}
-                            <a href="{% url 'reports_dashboard' %}">Reports</a>
-                            {% endif %}
-
-                            <div class="dropdown-divider"></div>
-
-                            {% if user.is_superuser %}
-                            <a href="{% url 'admin_access' %}">Admin Console</a>
-                            {% endif %}
-
-                            <a href="{% url 'logout' %}">Logout ({{ user.username }})</a>
-                        </div>
-                    </div>
-                    {% else %}
+                    {% if not user.is_authenticated %}
+                    <a href="{% url 'login' %}" class="nav-link">Login</a>
                     {% endif %}
-
-                    <a href="{% url 'book_appointment' %}" class="btn-primary">Book Appointment</a>
                 </div>
+                <a href="{% url 'book_appointment' %}" class="btn btn-primary btn-sm ml-3">Book Appointment</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="btn btn-danger btn-sm ml-2"><i class="fas fa-power-off mr-1"></i>
+                    Logout</a>
+                {% endif %}
+                <div class="mobile-toggle d-md-none"><i class="fas fa-bars"></i></div>
             </nav>
         </div>
     </header>
 
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+    <!-- App Container: Flex layout if authenticated, standard block if not -->
+    <div class="{% if user.is_authenticated %}app-container{% endif %}">
+
+        {% if user.is_authenticated %}
+        <!-- Persistent Sidebar -->
+        <aside class="app-sidebar active">
+            <ul class="app-sidebar-menu">
+                {% for item in sidebar_menu %}
+                <li>
+                    <a href="{{ item.url }}" class="{% if request.path == item.url %}active{% endif %}">
+                        <i class="{{ item.icon }}"></i> {{ item.label }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </aside>
+        {% endif %}
+
+        <!-- Main Content Wrapper -->
+        <main class="{% if user.is_authenticated %}app-main-content{% endif %}">
+            {% block content %}{% endblock %}
+        </main>
+
+    </div>
 
     <!-- Global Message Modal -->
     {% if messages %}

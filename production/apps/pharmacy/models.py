@@ -27,6 +27,7 @@ class Medicine(models.Model):
     
     category = models.ForeignKey(MedicineCategory, on_delete=models.SET_NULL, null=True, blank=True)
     vendor = models.ForeignKey('inventory.Vendor', on_delete=models.SET_NULL, null=True, blank=True, help_text="Preferred Vendor")
+    barcode = models.CharField(max_length=100, unique=True, blank=True, null=True, help_text="Barcode/UPC")
     name = models.CharField(max_length=200)
     generic_name = models.CharField(max_length=200, blank=True, help_text="Generic name of the drug")
     manufacturer = models.CharField(max_length=200, blank=True)
@@ -34,6 +35,7 @@ class Medicine(models.Model):
     dosage_form = models.CharField(max_length=100, help_text="Tablet, Syrup, Injection, etc.")
     schedule_type = models.CharField(max_length=5, choices=SCHEDULE_CHOICES, default='OTC', help_text="Drug Schedule Classification")
     reorder_level = models.PositiveIntegerField(default=10, help_text="Minimum stock level before reordering")
+    tax = models.DecimalField(max_digits=5, decimal_places=2, default=5.00, help_text="Tax percentage")
     
     def __str__(self):
         return f"{self.name} ({self.schedule_type})"

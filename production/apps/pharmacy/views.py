@@ -166,6 +166,7 @@ def pos_view(request):
                         description=f"{batch.medicine.name} (Batch: {batch.batch_number})",
                         quantity=quantity,
                         unit_price=price,
+                        tax_rate=batch.medicine.tax,
                         line_total=line_total
                     )
 
@@ -200,15 +201,34 @@ def pos_view(request):
     
     # AJAX Search Handler
     if request.headers.get('x-requested-with') == 'XMLHttpRequest' and request.GET.get('term'):
-        term = request.GET.get('term')
+        term = request.GET.get('term').strip()
         results = []
+        
+        from django.db.models import Q
+        
+        # 1. Exact Barcode Match
+        barcode_match = Batch.objects.filter(
+            quantity__gt=0,
+            expiry_date__gte=timezone.now().date(),
+            medicine__barcode__iexact=term
+        ).select_related('medicine').first() # Get the best batch (FIFO by default if ordered, or distinct?)
+        # Ideally we want specific batch if barcode matches medicine? 
+        # Actually barcode is on Medicine, so it maps to ANY batch of that medicine.
+        # We should probably return ALL valid batches for that medicine, or just the best one if 'scan-and-go'.
+        
         matches = Batch.objects.filter(
             quantity__gt=0, 
-            expiry_date__gte=timezone.now().date(),
-            medicine__name__istartswith=term
-        ).select_related('medicine').order_by('expiry_date')[:20] # Limit results
+            # REMOVED expiry_date filter to allow showing expired items as warning
+        ).filter(
+            Q(medicine__name__icontains=term) | 
+            Q(medicine__barcode__iexact=term) |
+            Q(medicine__generic_name__icontains=term)
+        ).select_related('medicine').order_by('expiry_date')[:20]
         
         for batch in matches:
+            is_barcode_match = (batch.medicine.barcode and batch.medicine.barcode.lower() == term.lower())
+            is_expired = batch.is_expired()
+            
             results.append({
                 'id': batch.id,
                 'name': batch.medicine.name,
@@ -216,7 +236,9 @@ def pos_view(request):
                 'batch': batch.batch_number,
                 'expiry': batch.expiry_date.strftime('%b %d, %Y'),
                 'price': float(batch.sell_price),
-                'stock': batch.quantity
+                'stock': batch.quantity,
+                'is_barcode': is_barcode_match,
+                'is_expired': is_expired
             })
         return JsonResponse(results, safe=False)
 

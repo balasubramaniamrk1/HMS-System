@@ -91,9 +91,15 @@ def check_out(request):
         if attendance:
             attendance.check_out = timezone.now().time()
             attendance.save()
-            messages.success(request, "Checked out successfully.")
+            messages.success(request, "Checked out successfully. Logging out...")
+            
+            # --- Logout Logic ---
+            from django.contrib.auth import logout
+            logout(request)
+            return redirect('home')
         else:
              messages.error(request, "No active session found to check out from.")
+             return redirect('staff_dashboard')
             
     return redirect('staff_dashboard')
 

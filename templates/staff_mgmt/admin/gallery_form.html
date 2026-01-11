@@ -6,8 +6,8 @@
 <div class="container mt-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'admin_dashboard' %}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'gallery_list' %}">Gallery</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'staff_mgmt:admin_dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'staff_mgmt:gallery_list' %}">Gallery</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
         </ol>
     </nav>
@@ -40,7 +40,7 @@
 
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Upload Image</button>
-                            <a href="{% url 'gallery_list' %}" class="btn btn-outline-secondary">Cancel</a>
+                            <a href="{% url 'staff_mgmt:gallery_list' %}" class="btn btn-outline-secondary">Cancel</a>
                         </div>
                     </form>
                 </div>

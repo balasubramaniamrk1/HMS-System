@@ -12,22 +12,50 @@ def gallery(request):
     images = GalleryImage.objects.all()
     return render(request, 'core/gallery.html', {'images': images})
 
+@login_required
+def unified_dashboard(request):
+    """
+    Renders the new Grid Style Dashboard.
+    """
+    return render(request, 'core/dashboard_grid.html')
+
 def role_based_redirect(request):
     user = request.user
-    if user.is_superuser:
-        return redirect('admin_dashboard')
-    elif user.groups.filter(name='Hospital Admins').exists():
-        return redirect('admin_dashboard')
-    elif user.groups.filter(name='Inventory Managers').exists():
-        return redirect('inventory_list')
-    elif user.groups.filter(name='Doctors').exists():
-        return redirect('doctor_console')
-    elif user.groups.filter(name='Receptionist').exists():
-        return redirect('staff_dashboard')
-    elif user.groups.filter(name='Staff').exists():
-        return redirect('staff_attendance')
-    else:
+    if not user.is_authenticated:
         return redirect('home')
+
+    # Superuser / Hospital Admin
+    if user.is_superuser or user.groups.filter(name='Hospital Admins').exists():
+        return redirect('staff_mgmt:admin_dashboard')
+
+    # Doctor
+    if hasattr(user, 'doctor_profile') or user.groups.filter(name='Doctors').exists():
+        return redirect('doctor_console')
+
+    # Pharmacist
+    if user.groups.filter(name='Pharmacist').exists():
+        return redirect('pharmacy:dashboard')
+
+    # Inventory Manager
+    if user.groups.filter(name='Inventory Managers').exists():
+        return redirect('inventory_dashboard')
+        
+    # Lab / Radiology (Future implication, mapping to generalized staff dashboard for now or specific if exists)
+    
+    # Receptionist / Admission Desk
+    if user.groups.filter(name='Receptionist').exists() or user.groups.filter(name='Front Desk').exists():
+        return redirect('staff_dashboard')
+
+    # Billing Staff
+    if user.groups.filter(name='Billing').exists():
+        return redirect('billing:dashboard')
+
+    # Default Staff fallback
+    if user.groups.filter(name='Staff').exists():
+        return redirect('staff_dashboard')
+
+    # Fallback for generic users
+    return redirect('unified_dashboard')
 
 def home(request):
     departments = Department.objects.all()[:4] # Featured departments

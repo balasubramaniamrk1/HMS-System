@@ -61,7 +61,11 @@
                         {% for batch in batches %}
                         <tr>
                             <td>
-                                <strong>{{ batch.medicine.name }}</strong><br>
+                                <strong>{{ batch.medicine.name }}</strong>
+                                {% if batch.medicine.barcode %}
+                                <br><small class="text-secondary"><i class="fas fa-barcode"></i> {{ batch.medicine.barcode }}</small>
+                                {% endif %}
+                                <br>
                                 <small class="text-muted">{{ batch.medicine.generic_name }}</small>
                             </td>
                             <td>{{ batch.medicine.category.name|default:"-" }}</td>
@@ -106,17 +110,11 @@
 
             const medNameCell = row.cells[0];
             if (medNameCell) {
-                // Get just the medicine name text, ignoring the generic name in small tag if possible
-                // actually textContent usually merges them. "ParacetamolParamol".
-                // We want to match "Paracetamol" starting with query.
-                // A safer bet is checking if the cell text content starts with query, 
-                // but ignoring whitespace.
-
+                // Get the entire text content of the cell (includes Name, Barcode, Generic)
                 const text = medNameCell.textContent.toLowerCase().trim();
 
-                // User asked for "start typing medicine name... list only that medicine".
-                // AND "sequence manner" -> startsWith.
-                if (text.startsWith(query)) {
+                // Allow fuzzy search (contains instead of startsWith for better UX)
+                if (text.includes(query)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';

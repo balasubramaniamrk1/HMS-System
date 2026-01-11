@@ -8,6 +8,7 @@ from .models import StaffProfile, Shift, Attendance
 from apps.core.utils_logging import log_admin_action
 from doctors.models import Doctor, Department
 from core.models import HealthPackage, GalleryImage
+from pharmacy.models import PurchaseOrder
 from .forms import (
     StaffUserCreationForm, StaffProfileForm, StaffUserChangeForm,
     DoctorProfileForm, DepartmentForm, 
@@ -35,7 +36,8 @@ def admin_dashboard(request):
         'total_staff': StaffProfile.objects.count(),
         'active_packages': HealthPackage.objects.filter(is_active=True).count(),
         'departments_count': Department.objects.count(),
-        'recent_staff': StaffProfile.objects.select_related('user').order_by('-joining_date')[:5]
+        'recent_staff': StaffProfile.objects.select_related('user').order_by('-joining_date')[:5],
+        'pending_purchase_orders': PurchaseOrder.objects.filter(status='pending').count()
     }
     return render(request, 'staff_mgmt/admin/dashboard.html', context)
 
@@ -63,7 +65,7 @@ def staff_create(request):
             
             log_admin_action(request.user, "Create Staff", f"Created staff {user.username}")
             messages.success(request, f"Staff {user.get_full_name()} created successfully.")
-            return redirect('staff_list')
+            return redirect('staff_mgmt:staff_list')
     else:
         user_form = StaffUserCreationForm()
         profile_form = StaffProfileForm()
@@ -90,7 +92,7 @@ def staff_edit(request, pk):
             
             log_admin_action(request.user, "Edit Staff", f"Updated details for {user.username}")
             messages.success(request, f"Staff {user.get_full_name()} updated successfully.")
-            return redirect('staff_list')
+            return redirect('staff_mgmt:staff_list')
     else:
         user_form = StaffUserChangeForm(instance=user)
         profile_form = StaffProfileForm(instance=profile)
@@ -121,7 +123,7 @@ def doctor_create(request):
             profile.name = f"{user.first_name} {user.last_name}" # Sync name
             profile.save()
             messages.success(request, f"Doctor {profile.name} added successfully.")
-            return redirect('doctor_list')
+            return redirect('staff_mgmt:doctor_list')
     else:
         user_form = StaffUserCreationForm()
         profile_form = DoctorProfileForm()
@@ -142,7 +144,7 @@ def department_list(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Department created.")
-            return redirect('department_list')
+            return redirect('staff_mgmt:department_list')
     else:
         form = DepartmentForm()
     return render(request, 'staff_mgmt/admin/departments.html', {'departments': departments, 'form': form})
@@ -157,7 +159,7 @@ def shift_list(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Shift created.")
-            return redirect('shift_list')
+            return redirect('staff_mgmt:shift_list')
     else:
         form = ShiftForm()
     return render(request, 'staff_mgmt/admin/shifts.html', {'shifts': shifts, 'form': form})
@@ -178,7 +180,7 @@ def gallery_upload(request):
             form.save()
             log_admin_action(request.user, "Gallery Upload", "Uploaded new image")
             messages.success(request, "Image uploaded successfully.")
-            return redirect('gallery_list')
+            return redirect('staff_mgmt:gallery_list')
     else:
         form = GalleryImageForm()
     
@@ -192,7 +194,7 @@ def gallery_delete(request, pk):
         image.delete()
         log_admin_action(request.user, "Gallery Delete", f"Deleted image {pk}")
         messages.success(request, "Image deleted.")
-    return redirect('gallery_list')
+    return redirect('staff_mgmt:gallery_list')
 
 # --- Attendance Management ---
 @login_required

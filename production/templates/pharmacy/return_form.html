@@ -72,8 +72,28 @@
 <script>
     function submitReturn() {
         const items = [];
+        let hasError = false;
+        let errorMessage = "";
+
         document.querySelectorAll('.return-qty').forEach(input => {
-            const qty = parseInt(input.value);
+            const qty = parseInt(input.value) || 0;
+            const max = parseInt(input.getAttribute('data-max'));
+            const medName = input.closest('tr').cells[0].innerText;
+
+            if (qty > max) {
+                hasError = true;
+                errorMessage = `Cannot return more than sold quantity for ${medName}. Max: ${max}`;
+                input.classList.add('is-invalid');
+                return; // Break inner loop (forEach doesn't break but we set flag)
+            }
+            if (qty < 0) {
+                hasError = true;
+                errorMessage = `Quantity cannot be negative for ${medName}.`;
+                input.classList.add('is-invalid');
+                return;
+            }
+            input.classList.remove('is-invalid');
+
             if (qty > 0) {
                 const id = input.getAttribute('data-id');
                 const isRestock = document.querySelector(`.is-restock[data-id="${id}"]`).checked;
@@ -86,8 +106,13 @@
             }
         });
 
+        if (hasError) {
+            alert(errorMessage);
+            return;
+        }
+
         if (items.length === 0) {
-            alert("Please select at least one item to return.");
+            alert("Please select at least one item to return (quantity > 0).");
             return;
         }
 

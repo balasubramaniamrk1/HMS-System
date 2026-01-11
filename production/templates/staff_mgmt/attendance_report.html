@@ -26,7 +26,7 @@
                 <select name="department" class="form-control mr-3" onchange="this.form.submit()">
                     <option value="">All Departments</option>
                     {% for dept in departments %}
-                    <option value="{{ dept }}" {% if selected_department==dept %}selected{% endif %}>{{ dept }}</option>
+                    <option value="{{ dept }}" {% if selected_department == dept %}selected{% endif %}>{{ dept }}</option>
                     {% endfor %}
                 </select>
 
@@ -81,7 +81,7 @@
                         <tr>
                             <td>{{ record.date }}</td>
                             <td>
-                                <strong>{{ record.staff.user.get_full_name }}</strong><br>
+                                <strong>{{ record.staff.user.get_full_name|default:record.staff.user.username}}</strong><br>
                                 <small class="text-muted">{{ record.staff.employee_id }}</small>
                             </td>
                             <td>{{ record.staff.department }}</td>

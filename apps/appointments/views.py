@@ -57,9 +57,10 @@ def staff_dashboard(request):
     is_doctor = 'Doctors' in user_groups
     is_receptionist = 'Receptionists' in user_groups or 'Receptionist' in user_groups
     is_nurse = 'Nurses' in user_groups or 'Nurse' in user_groups
+    is_admin = 'Hospital Admins' in user_groups or request.user.is_superuser
     
-    # 1. Appointments (Doctors, Receptionists, Nurses)
-    show_appointments = is_doctor or is_receptionist or is_nurse
+    # 1. Appointments (Doctors, Receptionists, Nurses, Admins)
+    show_appointments = is_doctor or is_receptionist or is_nurse or is_admin
     appointments = []
     if show_appointments:
         appointments = AppointmentRequest.objects.all().order_by('-created_at')
@@ -91,8 +92,8 @@ def staff_dashboard(request):
         dashboard_title = "Doctor Console"
         dashboard_subtitle = "Manage Patient Appointments and Consultations"
     elif is_receptionist or is_nurse:
-        dashboard_title = "Front Desk Dashboard"
-        dashboard_subtitle = "Manage Appointments and Patient Flow"
+        dashboard_title = "Manage Appointments and Schedules"
+        dashboard_subtitle = ""
 
     # --- Integration: Attendance Widget ---
     todays_attendance = None
@@ -100,6 +101,22 @@ def staff_dashboard(request):
     staff_initials = ""
     staff_name = ""
     staff_designation = ""
+
+    # Auto-create StaffProfile if missing (Temporary/Permissive measure)
+    if not hasattr(request.user, 'staff_profile'):
+        from staff_mgmt.models import StaffProfile
+        from django.utils import timezone
+        
+        # Create a basic profile
+        StaffProfile.objects.create(
+            user=request.user,
+            employee_id=f"EMP{request.user.id:04d}",
+            department="General",
+            designation="Staff",
+            joining_date=timezone.now().date()
+        )
+        # Refresh user cache
+        request.user.refresh_from_db()
 
     try:
         if hasattr(request.user, 'staff_profile'):
@@ -180,7 +197,8 @@ def staff_dashboard(request):
         'staff_designation': staff_designation,
         
         'dashboard_title': dashboard_title,
-        'dashboard_subtitle': dashboard_subtitle
+        'dashboard_subtitle': dashboard_subtitle,
+        'is_doctor': is_doctor,
     })
 
 @login_required
@@ -256,8 +274,7 @@ def consultation_view(request, pk):
             patient, created = Patient.objects.get_or_create(
                 phone=appointment.phone,
                 defaults={
-                    'name': appointment.name,
-                    'email': appointment.email
+                    'name': appointment.name
                 }
             )
             appointment.patient = patient

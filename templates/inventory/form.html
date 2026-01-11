@@ -3,11 +3,17 @@
 
 {% block content %}
 <div class="container mt-4">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-dark">{{ title }}</h2>
+        <a href="javascript:history.back()" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+    </div>
+
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">{{ title }}</h4>
+        <div class="col-md-10">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white border-bottom">
+                    <h5 class="mb-0 text-primary font-weight-bold"><i class="fas fa-edit"></i> {{ title }} Form</h5>
                 </div>
                 <div class="card-body">
                     <form method="post" enctype="multipart/form-data">
@@ -33,33 +39,37 @@
                         </div>
                         {% else %}
 
-                        {% for field in form %}
-                        <div class="form-group mb-3">
-                            {{ field.label_tag }}
+                        <div class="row">
+                            {% for field in form %}
+                            <div class="col-md-6">
+                                <div class="form-group mb-4">
+                                    <label class="form-label font-weight-bold text-dark">{{ field.label }}</label>
 
-                            {% if field.name == 'barcode_data' %}
-                            <div class="input-group">
-                                {{ field }}
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" onclick="startScanner()">
-                                        <i class="fas fa-barcode"></i> Scan
-                                    </button>
+                                    {% if field.name == 'barcode_data' %}
+                                    <div class="input-group">
+                                        {{ field }}
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-info" type="button" onclick="startScanner()">
+                                                <i class="fas fa-barcode"></i> Scan
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {{ field }}
+                                    {% endif %}
+
+                                    {% if field.help_text %}
+                                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                                    {% endif %}
+                                    {% if field.errors %}
+                                    <div class="text-danger small mt-1 pl-1">
+                                        <i class="fas fa-exclamation-circle"></i> {{ field.errors.0 }}
+                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
-                            {% else %}
-                            {{ field }}
-                            {% endif %}
-
-                            {% if field.help_text %}
-                            <small class="form-text text-muted">{{ field.help_text }}</small>
-                            {% endif %}
-                            {% if field.errors %}
-                            <div class="text-danger small mt-1">
-                                {{ field.errors.0 }}
-                            </div>
-                            {% endif %}
+                            {% endfor %}
                         </div>
-                        {% endfor %}
 
                         <div class="d-flex justify-content-end mt-4">
                             <a href="{% url 'inventory_list' %}" class="btn btn-secondary mr-2">Cancel</a>

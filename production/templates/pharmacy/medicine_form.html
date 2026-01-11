@@ -5,6 +5,11 @@
 
 {% block content %}
 <div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-dark font-weight-bold">Add Medicine</h2>
+        <a href="{% url 'pharmacy:stock_list' %}" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i>
+            Back</a>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow">
@@ -14,6 +19,14 @@
                 <div class="card-body">
                     <form method="post">
                         {% csrf_token %}
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label>Barcode / UPC <small class="text-muted">(Scan to auto-fill)</small></label>
+                                {{ form.barcode }}
+                                {{ form.barcode.errors }}
+                            </div>
+                        </div>
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -59,9 +72,15 @@
                             {{ form.description }}
                         </div>
 
-                        <div class="form-group">
-                            <label>Reorder Level (Alert Threshold)</label>
-                            {{ form.reorder_level }}
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Reorder Level (Alert Threshold)</label>
+                                {{ form.reorder_level }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Tax Rate (%)</label>
+                                {{ form.tax }}
+                            </div>
                         </div>
 
                         <div class="d-flex justify-content-end mt-4">
