@@ -377,7 +377,10 @@
 
                         tr.className = rowClass;
                         tr.innerHTML = `
-                        <td><strong>${item.name}</strong><br><small class="text-muted">${item.generic || ''}</small></td>
+                        <td><strong>${item.name}</strong><br>
+                            <small class="text-muted">${item.generic || ''}</small>
+                            ${item.barcode ? `<br><small class="text-info"><i class="fas fa-barcode"></i> ${item.barcode}</small>` : ''}
+                        </td>
                         <td>${item.batch}</td>
                         <td>${item.expiry}</td>
                         <td>₹${item.price.toFixed(2)}</td>

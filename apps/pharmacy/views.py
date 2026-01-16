@@ -4,13 +4,12 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from django.db import transaction
 from django.utils import timezone
-from .models import Medicine, Batch, Sale, SaleItem
+from .models import Medicine, Batch, Sale, SaleItem, MedicineReturn, MedicineReturnItem
+from .forms import MedicineForm
 from appointments.models import Consultation
 from admissions.models import Admission
 from doctors.models import Doctor
 import json
-from .models import Medicine, Batch, Sale, SaleItem, MedicineReturn, MedicineReturnItem
-from .forms import MedicineForm
 
 @login_required
 def pharmacy_dashboard(request):
@@ -238,7 +237,8 @@ def pos_view(request):
                 'price': float(batch.sell_price),
                 'stock': batch.quantity,
                 'is_barcode': is_barcode_match,
-                'is_expired': is_expired
+                'is_expired': is_expired,
+                'barcode': batch.medicine.barcode or ''
             })
         return JsonResponse(results, safe=False)
 

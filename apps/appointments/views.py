@@ -205,9 +205,27 @@ def staff_dashboard(request):
 def update_status(request, pk, status):
     appointment = get_object_or_404(AppointmentRequest, pk=pk)
     if status in ['confirmed', 'cancelled', 'completed']:
+        if status == 'confirmed' and not appointment.token_id:
+            # Generate Token ID: <DDMonYYYY>-<Sequence>
+            today = timezone.now().date()
+            date_str = today.strftime('%d%b%Y')  # e.g. 14Jan2026
+            
+            # Count existing confirmed appointments for today to get next sequence
+            # We filter by token_id__startswith to be safe, or just date/status
+            # Let's use token_id prefix to ensure unique sequence for the day
+            count = AppointmentRequest.objects.filter(
+                token_id__startswith=date_str
+            ).count()
+            
+            sequence = count + 1
+            token = f"{date_str}-{sequence:02d}"
+            appointment.token_id = token
+            messages.success(request, f"Appointment confirmed. Token ID generated: {token}")
+
         appointment.status = status
         appointment.save()
-        messages.success(request, f"Appointment status updated to {status}.")
+        if status != 'confirmed':
+             messages.success(request, f"Appointment status updated to {status}.")
     return redirect('staff_dashboard')
 
 from core.decorators import group_required

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-dark font-weight-bold">Patient Admission</h2>
+        
         <a href="{% url 'admissions:dashboard' %}" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i>
             Back</a>
     </div>
@@ -11,7 +11,7 @@
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0"><i class="fas fa-user-plus mr-2"></i>New Patient Admission</h5>
+                    <h5 class="mb-0 text-white"><i class="fas fa-user-plus mr-2"></i>New Patient Admission</h5>
                 </div>
                 <div class="card-body">
                     <form method="post">
@@ -62,8 +62,7 @@
                             <select name="bed" class="form-control" required>
                                 <option value="">-- Select Available Bed --</option>
                                 {% for bed in available_beds %}
-                                <option value="{{ bed.id }}">{{ bed.ward.name }} - {{ bed.bed_number }} ({{
-                                    bed.ward.get_ward_type_display }}) - ₹{{ bed.price_per_day }}/day</option>
+                                <option value="{{ bed.id }}">{{ bed.ward.name }} - {{ bed.bed_number }} ({{                                    bed.ward.get_ward_type_display }}) - ₹{{ bed.price_per_day }}/day</option>
                                 {% endfor %}
                             </select>
                         </div>

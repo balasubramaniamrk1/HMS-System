@@ -93,8 +93,7 @@
                         <tr>
                             <td width="60%" valign="top">
                                 <h1 style="color: #800000; margin: 0; font-size: 24px; font-weight: bold;">Raagavaa
-                                    Hospital
-                                </h1>
+                                    Hospital</h1>
                                 <p style="margin: 2px 0;">New Pet, Krishnagiri, Tamil Nadu 635002</p>
                                 <p style="margin: 2px 0;">Phone: 095669 26840</p>
                                 <p style="margin: 2px 0;">GSTIN: 08AALCR2857A1ZD</p>
@@ -129,8 +128,23 @@
                                     BILL TO
                                 </div>
                                 <div style="padding: 10px;">
-                                    <strong style="font-size: 16px; display: block; margin-bottom: 5px;">{{                                         invoice.patient_name }}</strong>
+                                    <!-- Use patient_nm local var to avoid split lines -->
+                                    {% with patient_nm=invoice.patient_name %}
+                                    <strong style="font-size: 16px; display: block; margin-bottom: 5px;">
+                                        {{ patient_nm }}
+                                    </strong>
+                                    {% endwith %}
+
                                     <div style="color: #555;">
+                                        {% if invoice.consultation and invoice.consultation.appointment.patient %}
+                                        {% with pat=invoice.consultation.appointment.patient %}
+                                        <strong>ID: {{ pat.patient_id }}</strong><br>
+                                        {% endwith %}
+                                        {% elif invoice.pharmacy_sale and invoice.pharmacy_sale.patient %}
+                                        {% with pat=invoice.pharmacy_sale.patient %}
+                                        <strong>ID: {{ pat.patient_id }}</strong><br>
+                                        {% endwith %}
+                                        {% endif %}
                                         123, Patient Address Line 1<br>
                                         City, State - Pin Code<br>
                                         Phone: --
@@ -141,12 +155,26 @@
                             <td width="50%" valign="top">
                                 <div
                                     style="background-color: #800000; color: white; padding: 5px 10px; font-weight: bold; -webkit-print-color-adjust: exact;">
-                                    SHIP TO
+                                    Doctor's details
                                 </div>
                                 <div style="padding: 10px;">
-                                    <strong style="font-size: 16px; display: block; margin-bottom: 5px;">{{                                         invoice.doctor.name|default:"--" }}</strong>
+                                    <strong style="font-size: 16px; display: block; margin-bottom: 5px;">
+                                        {% if invoice.doctor %}
+                                        {% with doc_name=invoice.doctor.name %}
+                                        {% if doc_name|slice:":3" == "Dr." %}
+                                        {{ doc_name|slice:"4:" }}
+                                        {% elif doc_name|slice:":4" == "Dr. " %}
+                                        {{ doc_name|slice:"4:" }}
+                                        {% else %}
+                                        {{ doc_name }}
+                                        {% endif %}
+                                        {% endwith %}
+                                        {% else %}
+                                        --
+                                        {% endif %}
+                                    </strong>
                                     <div style="color: #555;">
-                                        Doctor / Department Ref<br>
+                                        Consulted Doctor<br>
                                         Hospital Internal Code
                                     </div>
                                 </div>
@@ -169,14 +197,25 @@
                         <tbody>
                             {% for item in invoice.items.all %}
                             <tr>
-                                <td style="border: 1px solid #000; padding: 8px;">{{ item.description }}</td>
-                                <td style="border: 1px solid #000; padding: 8px; text-align: center;">{{ item.quantity                                     }}</td>
-                                <td style="border: 1px solid #000; padding: 8px; text-align: right;">Rs. {{                                     item.unit_price|floatformat:2 }}</td>
+                                <td style="border: 1px solid #000; padding: 8px;">
+                                    {{ item.description }}
+                                </td>
+                                <!-- Short lines for auto-formatter safety -->
+                                <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+                                    {{ item.quantity }}
+                                </td>
+                                <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+                                    Rs. {{ item.unit_price|floatformat:2 }}
+                                </td>
                                 <td style="border: 1px solid #000; padding: 8px; text-align: right;">
                                     <strong>{{ item.tax_rate|floatformat:0 }}%</strong><br>
-                                    <small style="color: #666; font-size: 11px;">(Rs. {{ item.line_total|floatformat:2                                         }})</small>
+                                    <small style="color: #666; font-size: 11px;">
+                                        (Rs. {{ item.line_total|floatformat:2 }})
+                                    </small>
                                 </td>
-                                <td style="border: 1px solid #000; padding: 8px; text-align: right;">Rs. {{                                     item.line_total|floatformat:2 }}</td>
+                                <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+                                    Rs. {{ item.line_total|floatformat:2 }}
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -184,8 +223,9 @@
                             <tr>
                                 <td colspan="4" align="right"
                                     style="border: 1px solid #000; padding: 10px; font-weight: bold;">Sub Total</td>
-                                <td align="right" style="border: 1px solid #000; padding: 10px; font-weight: bold;">Rs.
-                                    {{ invoice.total_amount|floatformat:2 }}</td>
+                                <td align="right" style="border: 1px solid #000; padding: 10px; font-weight: bold;">
+                                    Rs. {{ invoice.total_amount|floatformat:2 }}
+                                </td>
                             </tr>
                         </tfoot>
                     </table>
@@ -197,13 +237,11 @@
                             <td width="55%" valign="top" style="border-right: 1px solid #000; padding: 15px;">
                                 <h3 style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Bank Details</h3>
                                 <p style="margin: 2px 0; font-size: 14px;"><strong>Account holder:</strong> Raagavaa
-                                    Hospital
-                                </p>
+                                    Hospital</p>
                                 <p style="margin: 2px 0; font-size: 14px;"><strong>Account number:</strong> 38028101723
                                 </p>
                                 <p style="margin: 2px 0; font-size: 14px;"><strong>Bank:</strong> SBI |
-                                    <strong>Branch:</strong> Jaipur
-                                </p>
+                                    <strong>Branch:</strong> Jaipur</p>
                                 <p style="margin: 2px 0; font-size: 14px;"><strong>IFSC code:</strong> SBIN0002836</p>
 
                                 <div style="margin-top: 20px;">
@@ -225,11 +263,15 @@
                                     </tr>
                                     <tr>
                                         <td style="border-bottom: 1px solid #ccc;">CGST @ 2.5%</td>
-                                        <td align="right" style="border-bottom: 1px solid #ccc;">Rs. {{                                             invoice.cgst|floatformat:2 }}</td>
+                                        <td align="right" style="border-bottom: 1px solid #ccc;">
+                                            Rs. {{ invoice.cgst|floatformat:2 }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td style="border-bottom: 1px solid #ccc;">SGST @ 2.5%</td>
-                                        <td align="right" style="border-bottom: 1px solid #ccc;">Rs. {{                                             invoice.sgst|floatformat:2 }}</td>
+                                        <td align="right" style="border-bottom: 1px solid #ccc;">
+                                            Rs. {{ invoice.sgst|floatformat:2 }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td
@@ -237,7 +279,8 @@
                                             Total Amount</td>
                                         <td align="right"
                                             style="background-color: #f0f0f0; font-weight: bold; border-top: 2px solid #000; font-size: 16px;">
-                                            Rs. {{ invoice.grand_total|floatformat:2 }}</td>
+                                            Rs. {{ invoice.grand_total|floatformat:2 }}
+                                        </td>
                                     </tr>
                                 </table>
 

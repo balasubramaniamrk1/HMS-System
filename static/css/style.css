@@ -1,27 +1,33 @@
 :root {
-    /* Premium Medical Palette */
+    /* State-of-the-Art Palette */
     --primary-color: #0E2A47;
-    /* Deep Navy */
-    --secondary-color: #E63946;
-    /* Vibrant Red for accents */
-    --accent-color: #457B9D;
-    /* Muted Blue */
+    /* Revert to Navy */
+    --secondary-color: #00d2ff;
+    /* Cyan accent */
+    --accent-color: #3a7bd5;
+    /* Deep Blue */
     --text-color: #1D3557;
-    /* Dark Blue-Grey */
-    --light-bg: #F1FAEE;
-    /* Very Light Mint/White */
-    --white: #ffffff;
+    /* Dark text for light bg */
+    --text-muted: #6c757d;
+
+    /* Glassmorphism Variables */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --card-hover-bg: rgba(255, 255, 255, 0.15);
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, #0E2A47 0%, #1D3557 100%);
     --gradient-accent: linear-gradient(135deg, #457B9D 0%, #A8DADC 100%);
 
-    /* Shadows */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --bg-gradient: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
+    /* Deep rich sunset/night */
+    --bg-gradient-2: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    /* Deep space */
+    --bg-gradient-3: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    /* Night sky */
 
-    --radius: 12px;
+    --radius: 16px;
     --font-main: 'Inter', sans-serif;
 }
 
@@ -33,18 +39,16 @@
 
 body {
     font-family: var(--font-main);
-    background-color: #F8F9FA;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    /* Light Cloudy Sky */
+    /* Using Light Sky as base */
     color: var(--text-color);
     line-height: 1.7;
-    /* Increased for airiness */
     margin: 0;
     min-height: 100vh;
     font-weight: 400;
-    /* Explicitly set to Regular */
     letter-spacing: 0.01em;
-    /* Subtle spacing */
     -webkit-font-smoothing: antialiased;
-    /* Sharper text on Mac */
 }
 
 h1,
@@ -116,17 +120,37 @@ h6 {
     box-shadow: 0 6px 15px rgba(14, 42, 71, 0.3);
 }
 
+/* Glassmorphism Utilities */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+.text-primary {
+    color: var(--secondary-color) !important;
+    /* Cyan for primary text on dark */
+}
+
 .card {
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: var(--radius);
-    background: white;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Bouncy transition */
+    color: var(--text-color);
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-8px) scale(1.02);
+    background: var(--card-hover-bg);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border-color: var(--secondary-color);
 }
 
 /* Login Page Styles - Image Replication */
@@ -303,8 +327,10 @@ h6 {
 
 /* Header & Nav */
 header {
-    background: var(--white);
-    box-shadow: var(--shadow-sm);
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    /* Soft shadow */
+    border-bottom: 1px solid #e0e0e0;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -538,7 +564,7 @@ header {
 
 .app-sidebar {
     width: 250px;
-    background-color: #fff;
+    background: #ffffff;
     border-right: 1px solid #e0e0e0;
     position: sticky;
     top: 0;
@@ -557,7 +583,7 @@ header {
 .app-sidebar-menu li a {
     display: block;
     padding: 12px 25px;
-    color: #555;
+    color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s;
@@ -580,7 +606,7 @@ header {
 .app-main-content {
     flex: 1;
     padding: 2px;
-    background-color: #f8f9fa;
+    background-color: transparent;
     overflow-x: hidden;
 }
 
@@ -685,4 +711,18 @@ header {
     color: #888;
     font-size: 1.2rem;
     margin-right: 15px;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }

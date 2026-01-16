@@ -12,7 +12,6 @@ class AppointmentRequest(models.Model):
 
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=15)
-    phone = models.CharField(max_length=15)
     patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, null=True, blank=True)
     email = models.EmailField(blank=True, null=True)
     doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True, blank=True)
@@ -21,6 +20,7 @@ class AppointmentRequest(models.Model):
     preferred_time = models.CharField(max_length=50, help_text="e.g. Morning, Evening, or 10:00 AM")
     message = models.TextField(blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    token_id = models.CharField(max_length=50, blank=True, null=True, help_text="Daily Token ID e.g. 14Jan2026-01")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
